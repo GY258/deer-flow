@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 import logging
+import os
 import requests
 import time
 from typing import Annotated, Optional
@@ -16,7 +17,7 @@ def bm25_search_tool(
     query: Annotated[str, "The search query in Chinese"],
     limit: Annotated[int, "Number of top results to return"] = 3,
     include_snippets: Annotated[bool, "Whether to include document snippets"] = True,
-    server_url: Annotated[str, "BM25 server URL"] = "http://localhost:5003"
+    server_url: Annotated[Optional[str], "BM25 server URL"] = None,
 ) -> str:
     """Use this tool to search Chinese documents using BM25 retrieval.
     
@@ -71,6 +72,9 @@ def bm25_search_tool(
         Search results as formatted string with titles, scores, and content snippets
     """
     try:
+        # Resolve BM25 server URL from param or environment (fallback to localhost for local dev)
+        if not server_url:
+            server_url = os.getenv("BM25_SERVER_URL", "http://localhost:5003")
         # 使用POST方式调用BM25服务
         data = {
             "query": query,
@@ -129,7 +133,7 @@ def bm25_search_tool(
 @tool
 @log_io
 def bm25_health_check_tool(
-    server_url: Annotated[str, "BM25 server URL"] = "http://localhost:5003"
+    server_url: Annotated[Optional[str], "BM25 server URL"] = None
 ) -> str:
     """Check the health status of BM25 search service.
     
@@ -140,6 +144,8 @@ def bm25_health_check_tool(
         Health status information
     """
     try:
+        if not server_url:
+            server_url = os.getenv("BM25_SERVER_URL", "http://localhost:5003")
         response = requests.get(f"{server_url}/health", timeout=5)
         response.raise_for_status()
         data = response.json()
@@ -156,7 +162,7 @@ def bm25_health_check_tool(
 @tool
 @log_io
 def bm25_stats_tool(
-    server_url: Annotated[str, "BM25 server URL"] = "http://localhost:5003"
+    server_url: Annotated[Optional[str], "BM25 server URL"] = None
 ) -> str:
     """Get statistics from BM25 search service.
     
@@ -167,6 +173,8 @@ def bm25_stats_tool(
         Statistics information
     """
     try:
+        if not server_url:
+            server_url = os.getenv("BM25_SERVER_URL", "http://localhost:5003")
         response = requests.get(f"{server_url}/stats", timeout=5)
         response.raise_for_status()
         data = response.json()
@@ -199,7 +207,7 @@ def bm25_stats_tool(
 @tool
 @log_io
 def bm25_database_info_tool(
-    server_url: Annotated[str, "BM25 server URL"] = "http://localhost:5003"
+    server_url: Annotated[Optional[str], "BM25 server URL"] = None
 ) -> str:
     """Get information about the BM25 database content and capabilities.
     
@@ -209,6 +217,7 @@ def bm25_database_info_tool(
     Returns:
         Database content information
     """
+    # Keep signature consistent; this tool provides static info.
     return """
 📚 BM25数据库内容说明:
 

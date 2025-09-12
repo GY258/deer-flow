@@ -1,0 +1,60 @@
+
+## 🎯 总结
+
+我已经为您创建了一个完整的Docker部署指南，包含：
+
+### ✅ 已完成的工作：
+
+1. **修复了Docker Compose配置**：
+   - 更新了健康检查路径
+   - 配置了正确的CORS设置
+   - 绑定了localhost端口
+
+2. **优化了Nginx配置**：
+   - 添加了流式支持（SSE）
+   - 简化了代理路径
+   - 移除了不必要的CORS头
+   - 设置了合适的超时时间
+
+3. **更新了环境变量**：
+   - 修正了API URL配置
+   - 移除了端口号
+
+4. **创建了完整的部署文档**：
+   - 系统要求
+   - 快速开始指南
+   - 详细的部署步骤
+   - Nginx配置说明
+   - SSL/HTTPS配置
+   - 故障排除指南
+   - 维护和更新说明
+
+### 🚀 下次部署时只需要：
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/bytedance/deer-flow.git
+cd deer-flow
+
+# 2. 配置环境
+cp .env.example .env
+cp conf.yaml.example conf.yaml
+# 编辑配置文件
+
+# 3. 设置Nginx
+sudo ./setup-nginx.sh
+
+# 4. 启动服务
+docker compose up --build -d
+
+# 5. 验证部署
+curl -I http://app.lerna-ai.com/api/config
+```
+
+这个部署方案使用了Host Nginx模式，提供了：
+- **流式支持**：支持Server-Sent Events
+- **安全性**：容器只绑定到localhost
+- **性能**：Nginx处理静态文件缓存
+- **可维护性**：清晰的配置分离
+
+现在您的DeerFlow已经可以正常使用了！🎉

@@ -1,3 +1,8 @@
+# 备份原配置
+cp docker-compose.yml docker-compose.yml.backup
+
+# 更新配置
+cat > docker-compose.yml << 'EOF'
 services:
   backend:
     build:
@@ -5,7 +10,7 @@ services:
       dockerfile: Dockerfile
     container_name: deer-flow-backend
     ports:
-      - "127.0.0.1:8000:8000"  # 只绑定到本地，通过nginx代理
+      - "8000:8000"  # 保留用于调试
     extra_hosts:
       - "host.docker.internal:host-gateway"
     env_file:
@@ -16,42 +21,32 @@ services:
     networks:
       - deer-flow-network
     environment:
-      # CORS配置 - 只允许nginx域名
-      - ALLOWED_ORIGINS=http://app.lerna-ai.com,https://app.lerna-ai.com
+      # CORS配置 - 允许多个源
+      - ALLOWED_ORIGINS=http://localhost:3000,http://app.lerna-ai.com,https://app.lerna-ai.com
       # BM25服务地址
       - BM25_SERVER_URL=http://host.docker.internal:5003
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/config"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   frontend:
     build:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - NEXT_PUBLIC_API_URL=http://app.lerna-ai.com/api  # 通过nginx代理
+        - NEXT_PUBLIC_API_URL=http://app.lerna-ai.com/api
     container_name: deer-flow-frontend
-    ports:
-      - "127.0.0.1:3000:3000"  # 只绑定到本地，通过nginx代理
+    # 移除公网端口暴露，只通过Nginx访问
+    # ports:
+    #   - "3000:3000"
     env_file:
       - .env
     depends_on:
-      backend:
-        condition: service_healthy
+      - backend
     restart: unless-stopped
     networks:
       - deer-flow-network
     environment:
-      # 前端访问后端的地址 - 通过nginx代理
       - NEXT_PUBLIC_API_URL=http://app.lerna-ai.com/api
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
 networks:
   deer-flow-network:
     driver: bridge
+EOF

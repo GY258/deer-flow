@@ -6,6 +6,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 # Install system dependencies including libpq
 RUN apt-get update && apt-get install -y \
     libpq-dev \
+    curl \
     && rm -rf /var/lib/apt/lists/*
     
 WORKDIR /app
