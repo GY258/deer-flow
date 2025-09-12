@@ -483,10 +483,19 @@ async def researcher_node(
     """Researcher node that do research"""
     logger.info("Researcher node is researching.")
     configurable = Configuration.from_runnable_config(config)
+    
+    # 原有的工具
     tools = [get_web_search_tool(configurable.max_search_results), crawl_tool]
+    
+    # 添加BM25检索工具
+    from src.tools.bm25_search import bm25_search_tool, bm25_health_check_tool, bm25_stats_tool, bm25_database_info_tool
+    tools.extend([bm25_search_tool, bm25_health_check_tool, bm25_stats_tool, bm25_database_info_tool])
+    
+    # 添加RAG检索工具（如果配置了的话）
     retriever_tool = get_retriever_tool(state.get("resources", []))
     if retriever_tool:
         tools.insert(0, retriever_tool)
+        
     logger.info(f"Researcher tools: {tools}")
     return await _setup_and_execute_agent_step(
         state,
