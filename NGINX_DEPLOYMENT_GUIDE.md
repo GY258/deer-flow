@@ -227,3 +227,4 @@ location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
 4. Nginx配置是否正确
 
 完成这些步骤后，你的DeerFlow应用就可以通过 `http://app.lerna-ai.com` 正常访问了！
+
