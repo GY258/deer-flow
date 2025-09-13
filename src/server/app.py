@@ -595,3 +595,49 @@ async def config():
         rag=RAGConfigResponse(provider=SELECTED_RAG_PROVIDER),
         models=get_configured_llm_models(),
     )
+
+@app.post("/api/simple-research")
+async def simple_research(request: ChatRequest):
+    """直接调用simple_researcher_node的端点"""
+    try:
+        from src.graph.nodes import simple_researcher_node
+        from src.config.configuration import Configuration
+        
+        # 获取用户查询内容
+        if not request.messages:
+            raise HTTPException(status_code=400, detail="No messages provided")
+        
+        # 获取最后一条消息的内容
+        last_message = request.messages[-1]
+        if isinstance(last_message.content, str):
+            query_content = last_message.content
+        else:
+            # 如果content是列表，提取文本内容
+            query_content = ""
+            for item in last_message.content:
+                if hasattr(item, 'text') and item.text:
+                    query_content += item.text
+        
+        # 准备状态
+        state = {
+            "research_topic": query_content,
+            "locale": "zh-CN"
+        }
+        
+        # 准备配置 - 修复：直接传递字典格式
+        config = {
+            "configurable": {
+                "max_plan_iterations": 1,
+                "max_step_num": 3,
+                "max_search_results": 5
+            }
+        }
+        
+        # 调用simple_researcher_node
+        result = await simple_researcher_node(state, config)
+        
+        return {"result": result.get("final_report", "")}
+        
+    except Exception as e:
+        logger.exception(f"Error in simple research: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
