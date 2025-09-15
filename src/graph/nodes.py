@@ -561,7 +561,7 @@ async def simple_researcher_node(state: State, config: RunnableConfig):
     
     # 获取用户查询
     query = state.get("research_topic", "")
-    locale = state.get("locale", "en-US")
+    locale = state.get("locale", "zh-CN")
     
     logger.info(f"用户查询: {query}")
     logger.info(f"用户语言: {locale}")
@@ -573,7 +573,7 @@ async def simple_researcher_node(state: State, config: RunnableConfig):
         logger.info("正在执行BM25搜索...")
         
         # 执行BM25搜索，获取更多相关结果
-        search_results = bm25_search_tool.invoke(query, limit=5, include_snippets=True)
+        search_results = bm25_search_tool.invoke(query, limit=2, include_snippets=True)
         logger.info(f"BM25搜索完成，结果长度: {len(str(search_results))}")
         logger.debug(f"BM25搜索结果: {search_results}")
         
