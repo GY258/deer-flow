@@ -41,7 +41,9 @@
       "maxStepsOfPlan": "研究计划的最大步骤数",
       "maxStepsDescription": "默认情况下，每个研究计划有 3 个步骤。",
       "maxSearchResults": "最大搜索结果数",
-      "maxSearchResultsDescription": "默认情况下，每个搜索步骤有 3 个结果。"
+      "maxSearchResultsDescription": "默认情况下，每个搜索步骤有 3 个结果。",
+      "simpleResearch": "简单研究模式",
+      "simpleResearchDescription": "直接使用BM25搜索获取餐饮专业解答，无需复杂规划流程"
     },
     "mcp": {
       "title": "MCP 服务器",
@@ -101,9 +103,14 @@
         "title": "调研模式：{status}",
         "description": "启用后，来菜将在规划前进行快速搜索。这对于与餐饮时事和新闻相关的研究很有用。"
       },
-      "enhancePrompt": "用 AI 增强提示",
-      "on": "开启",
-      "off": "关闭"
+        "enhancePrompt": "用 AI 增强提示",
+        "on": "开启",
+        "off": "关闭",
+        "simpleResearch": "简单研究",
+        "simpleResearchTooltip": {
+          "title": "简单研究模式 {status}",
+          "description": "直接使用BM25搜索获取餐饮专业解答，无需复杂规划流程"
+        }
     },
     "research": {
       "deepResearch": "深度研究",

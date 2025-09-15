@@ -38,6 +38,7 @@ const generalFormSchema = z.object({
   // Others
   enableBackgroundInvestigation: z.boolean(),
   enableDeepThinking: z.boolean(),
+  enableSimpleResearch: z.boolean(),
   reportStyle: z.enum(["academic", "popular_science", "news", "social_media"]),
 });
 
@@ -169,6 +170,29 @@ export const GeneralTab: Tab = ({
                     {t("maxSearchResultsDescription")}
                   </FormDescription>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="enableSimpleResearch"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div className="flex items-center gap-2">
+                      <Switch
+                        id="enableSimpleResearch"
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                      <Label className="text-sm" htmlFor="enableSimpleResearch">
+                        {t("simpleResearch")}
+                      </Label>
+                    </div>
+                  </FormControl>
+                  <FormDescription>
+                    {t("simpleResearchDescription")}
+                  </FormDescription>
                 </FormItem>
               )}
             />

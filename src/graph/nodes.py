@@ -264,10 +264,20 @@ def reporter_node(state: State, config: RunnableConfig):
     logger.info("Reporter write final report")
     configurable = Configuration.from_runnable_config(config)
     current_plan = state.get("current_plan")
+    
+    # 兼容没有 current_plan 的情况
+    if current_plan and hasattr(current_plan, 'title') and hasattr(current_plan, 'thought'):
+        task_title = current_plan.title
+        task_description = current_plan.thought
+    else:
+        # 使用 research_topic 作为备选
+        task_title = state.get("research_topic", "研究任务")
+        task_description = f"基于用户查询：{task_title} 进行研究和分析"
+    
     input_ = {
         "messages": [
             HumanMessage(
-                f"# Research Requirements\n\n## Task\n\n{current_plan.title}\n\n## Description\n\n{current_plan.thought}"
+                f"# Research Requirements\n\n## Task\n\n{task_title}\n\n## Description\n\n{task_description}"
             )
         ],
         "locale": state.get("locale", "en-US"),
@@ -276,10 +286,10 @@ def reporter_node(state: State, config: RunnableConfig):
     observations = state.get("observations", [])
 
     # Add a reminder about the new report format, citation style, and table usage
+    from langchain_core.messages import SystemMessage as _SystemMessage
     invoke_messages.append(
-        HumanMessage(
-            content="IMPORTANT: Structure your report according to the format in the prompt. Remember to include:\n\n1. Key Points - A bulleted list of the most important findings\n2. Overview - A brief introduction to the topic\n3. Detailed Analysis - Organized into logical sections\n4. Survey Note (optional) - For more comprehensive reports\n5. Key Citations - List all references at the end\n\nFor citations, DO NOT include inline citations in the text. Instead, place all citations in the 'Key Citations' section at the end using the format: `- [Source Title](URL)`. Include an empty line between each citation for better readability.\n\nPRIORITIZE USING MARKDOWN TABLES for data presentation and comparison. Use tables whenever presenting comparative data, statistics, features, or options. Structure tables with clear headers and aligned columns. Example table format:\n\n| Feature | Description | Pros | Cons |\n|---------|-------------|------|------|\n| Feature 1 | Description 1 | Pros 1 | Cons 1 |\n| Feature 2 | Description 2 | Pros 2 | Cons 2 |",
-            name="system",
+        _SystemMessage(
+            content="IMPORTANT: Structure your report according to the format in the prompt. Remember to include:\n\n1. Key Points - A bulleted list of the most important findings\n2. Overview - A brief introduction to the topic\n3. Detailed Analysis - Organized into logical sections\n4. Survey Note (optional) - For more comprehensive reports\n5. Key Citations - List all references at the end\n\nFor citations, DO NOT include inline citations in the text. Instead, place all citations in the 'Key Citations' section at the end using the format: `- [Source Title](URL)`. Include an empty line between each citation for better readability.\n\nPRIORITIZE USING MARKDOWN TABLES for data presentation and comparison. Use tables whenever presenting comparative data, statistics, features, or options. Structure tables with clear headers and aligned columns. Example table format:\n\n| Feature | Description | Pros | Cons |\n|---------|-------------|------|------|\n| Feature 1 | Description 1 | Pros 1 | Cons 1 |\n| Feature 2 | Description 2 | Pros 2 | Cons 2 |"
         )
     )
 
@@ -291,12 +301,30 @@ def reporter_node(state: State, config: RunnableConfig):
             )
         )
     logger.debug(f"Current invoke messages: {invoke_messages}")
-    response = get_llm_by_type(AGENT_LLM_MAP["reporter"]).invoke(invoke_messages)
-    response_content = response.content
-    logger.info(f"reporter response: {response_content}")
+    llm = get_llm_by_type(AGENT_LLM_MAP["reporter"]) 
+    response_content = ""
+    try:
+        logger.info("Reporter开始流式生成报告...")
+        for chunk in llm.stream(invoke_messages):
+            if getattr(chunk, "content", None):
+                response_content += chunk.content
+        if not response_content:
+            logger.warning("Reporter流式内容为空，尝试回退到invoke...")
+            resp = llm.invoke(invoke_messages)
+            response_content = getattr(resp, "content", "") or ""
+            if not response_content and getattr(resp, "tool_calls", None):
+                logger.warning(f"Reporter模型返回tool_calls无纯文本: {resp.tool_calls}")
+                response_content = "抱歉，本次报告为空（模型尝试了工具调用输出）。"
+    except Exception as e:
+        logger.error(f"Reporter LLM调用异常: {e}", exc_info=True)
+        response_content = f"抱歉，生成报告时出现错误: {str(e)}"
 
-    return {"final_report": response_content}
+    logger.info(f"reporter response length: {len(response_content)}")
 
+    return {
+        "final_report": response_content,
+        "messages": [AIMessage(content=response_content, name="reporter")],
+    }
 
 def research_team_node(state: State):
     """Research team node that collaborates on tasks."""
@@ -309,18 +337,40 @@ async def _execute_agent_step(
 ) -> Command[Literal["research_team"]]:
     """Helper function to execute a step using the specified agent."""
     current_plan = state.get("current_plan")
-    plan_title = current_plan.title
+    
+    # 兼容没有 current_plan 的情况
+    if current_plan and hasattr(current_plan, 'title') and hasattr(current_plan, 'steps'):
+        plan_title = current_plan.title
+        plan_steps = current_plan.steps
+    else:
+        # 使用 research_topic 作为备选，创建一个简单的步骤
+        plan_title = state.get("research_topic", "研究任务")
+        plan_steps = []
+        logger.info(f"No current_plan found, using research_topic: {plan_title}")
+    
     observations = state.get("observations", [])
 
     # Find the first unexecuted step
     current_step = None
     completed_steps = []
-    for step in current_plan.steps:
-        if not step.execution_res:
-            current_step = step
-            break
-        else:
-            completed_steps.append(step)
+    
+    if plan_steps:
+        for step in plan_steps:
+            if not step.execution_res:
+                current_step = step
+                break
+            else:
+                completed_steps.append(step)
+    else:
+        # 如果没有步骤，创建一个简单的默认步骤
+        from src.prompts.planner_model import Step, StepType
+        current_step = Step(
+            title=f"研究 {plan_title}",
+            description=f"对 {plan_title} 进行深入研究和分析",
+            step_type=StepType.RESEARCH,
+            execution_res=None
+        )
+        logger.info(f"Created default step for: {current_step.title}")
 
     if not current_step:
         logger.warning("No unexecuted step found")
@@ -416,7 +466,6 @@ async def _execute_agent_step(
         goto="research_team",
     )
 
-
 async def _setup_and_execute_agent_step(
     state: State,
     config: RunnableConfig,
@@ -507,6 +556,7 @@ async def researcher_node(
 async def simple_researcher_node(state: State, config: RunnableConfig):
     """餐饮智能助手节点，使用BM25搜索解答餐饮相关问题"""
     logger.info("餐饮智能助手节点运行中")
+    
     configurable = Configuration.from_runnable_config(config)
     
     # 获取用户查询
@@ -514,21 +564,25 @@ async def simple_researcher_node(state: State, config: RunnableConfig):
     locale = state.get("locale", "en-US")
     
     logger.info(f"用户查询: {query}")
+    logger.info(f"用户语言: {locale}")
     
     # 使用BM25搜索获取相关信息
+    search_results = ""
     try:
         from src.tools.bm25_search import bm25_search_tool
         logger.info("正在执行BM25搜索...")
         
         # 执行BM25搜索，获取更多相关结果
         search_results = bm25_search_tool.invoke(query, limit=5, include_snippets=True)
-        logger.info("BM25搜索完成")
+        logger.info(f"BM25搜索完成，结果长度: {len(str(search_results))}")
+        logger.debug(f"BM25搜索结果: {search_results}")
         
     except Exception as e:
-        logger.error(f"BM25搜索失败: {e}")
+        logger.error(f"BM25搜索失败: {e}", exc_info=True)
         search_results = f"搜索服务暂时不可用: {str(e)}"
     
     # 生成餐饮专业解答
+    logger.info("开始构建提示消息...")
     report_messages = [
         {
             "role": "system", 
@@ -585,25 +639,84 @@ async def simple_researcher_node(state: State, config: RunnableConfig):
         }
     ]
     
+    logger.info(f"提示消息构建完成，消息数量: {len(report_messages)}")
+    
     # 生成专业解答
+    final_answer = ""
     try:
-        response = get_llm_by_type(AGENT_LLM_MAP["reporter"]).invoke(report_messages)
-        final_answer = response.content
-        logger.info("专业解答生成完成")
-    except Exception as e:
-        logger.error(f"生成解答失败: {e}")
-        final_answer = f"抱歉，生成解答时出现错误: {str(e)}"
+        logger.info("开始调用LLM生成专业解答...")
+        logger.info(f"使用的LLM类型: {AGENT_LLM_MAP['reporter']}")
+        
+        # 参考coordinator_node的方式，直接调用LLM
+        # 将report_messages转换为LangChain消息格式
+        from langchain_core.messages import SystemMessage, HumanMessage as _HumanMessage
+        langchain_messages = []
+        
+        for msg in report_messages:
+            if msg["role"] == "system":
+                langchain_messages.append(SystemMessage(content=msg["content"]))
+            elif msg["role"] == "user":
+                langchain_messages.append(_HumanMessage(content=msg["content"]))
+        
+        logger.info(f"转换后的消息数量: {len(langchain_messages)}")
+        # 使用流式优先，便于前端看到过程输出
+        logger.info("开始直接调用LLM（流式）...")
+        logger.info("---------..")
+        llm = get_llm_by_type(AGENT_LLM_MAP["reporter"])
+        # 尝试流式调用
+        stream_success = False
+        try:
+            for chunk in llm.stream(langchain_messages):
+                if getattr(chunk, "content", None):
+                    content = chunk.content
+                    if isinstance(content, str):
+                        final_answer += content
+            stream_success = True
+        except Exception as stream_err:
+            logger.info(f"LLM流式调用失败，将回退到invoke: {stream_err}")
+        # 回退策略：若流式失败或无内容，则尝试非流式
+        if not stream_success or not final_answer:
+            logger.info("执行invoke回退策略...")
+            try:
+                resp = llm.invoke(langchain_messages)
+                resp_content = getattr(resp, "content", None)
+                final_answer = resp_content if isinstance(resp_content, str) else ""
+                if not final_answer and getattr(resp, "tool_calls", None):
+                    logger.warning(f"LLM返回了tool_calls且无纯文本: {resp.tool_calls}")
+                    final_answer = "抱歉，本次回答为空（模型尝试了工具调用输出）。"
+            except Exception as invoke_err:
+                logger.error(f"LLM invoke调用也失败: {invoke_err}", exc_info=True)
+                final_answer = f"抱歉，生成解答时出现错误: {str(invoke_err)}"
+        
+        logger.info(f"LLM调用完成，响应内容长度: {len(final_answer) if final_answer else 0}")
+        
+    except Exception as llm_error:
+        logger.error(f"LLM调用异常: {llm_error}", exc_info=True)
+        final_answer = f"抱歉，生成解答时出现错误: {str(llm_error)}"
+
+    logger.info(f"专业解答生成完成，答案长度: {len(final_answer)}")
+    logger.debug(f"生成的答案: {final_answer}")
     
     # 记录查询统计
     query_stats = {
         "query": query,
         "locale": locale,
-        "search_successful": "BM25搜索" in search_results and "失败" not in search_results,
-        "answer_generated": "错误" not in final_answer
+        "search_successful": "BM25搜索" in str(search_results) and "失败" not in str(search_results),
+        "answer_generated": "错误" not in final_answer,
+        "search_results_length": len(str(search_results)),
+        "final_answer_length": len(final_answer) if final_answer else 0
     }
     logger.info(f"查询处理完成: {query_stats}")
     
-    return {"final_report": final_answer}
+    # 返回字典格式，像reporter_node一样，这样前端就能看到流式输出了
+    # return {
+    #     "final_report": final_answer,
+    #     "messages": [AIMessage(content=final_answer, name="reporter")],
+    # }
+    return {
+          "final_report": final_answer,
+    "messages": [AIMessage(content=final_answer, name="simple_researcher")],
+        }
 
 async def coder_node(
     state: State, config: RunnableConfig

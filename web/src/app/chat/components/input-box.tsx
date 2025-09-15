@@ -5,7 +5,7 @@ import { MagicWandIcon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, Lightbulb, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import { Detective } from "~/components/deer-flow/icons/detective";
 import MessageInput, {
@@ -21,6 +21,7 @@ import type { Option, Resource } from "~/core/messages";
 import {
   setEnableDeepThinking,
   setEnableBackgroundInvestigation,
+  setEnableSimpleResearch,
   useSettingsStore,
 } from "~/core/store";
 import { cn } from "~/lib/utils";
@@ -54,6 +55,9 @@ export function InputBox({
   );
   const backgroundInvestigation = useSettingsStore(
     (state) => state.general.enableBackgroundInvestigation,
+  );
+  const enableSimpleResearch = useSettingsStore(
+    (state) => state.general.enableSimpleResearch,
   );
   const { config, loading } = useConfig();
   const reportStyle = useSettingsStore((state) => state.general.reportStyle);
@@ -246,6 +250,30 @@ export function InputBox({
               </Button>
             </Tooltip>
           )}
+          <Tooltip
+            className="max-w-60"
+            title={
+              <div>
+                <h3 className="mb-2 font-bold">
+                  {t("simpleResearchTooltip.title", {
+                    status: enableSimpleResearch ? t("on") : t("off"),
+                  })}
+                </h3>
+                <p>{t("simpleResearchTooltip.description")}</p>
+              </div>
+            }
+          >
+            <Button
+              className={cn(
+                "rounded-2xl",
+                enableSimpleResearch && "!border-brand !text-brand",
+              )}
+              variant="outline"
+              onClick={() => setEnableSimpleResearch(!enableSimpleResearch)}
+            >
+              🍽️ {t("simpleResearch")}
+            </Button>
+          </Tooltip>
 
           <Tooltip
             className="max-w-60"

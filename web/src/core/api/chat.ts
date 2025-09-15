@@ -24,6 +24,7 @@ export async function* chatStream(
     interrupt_feedback?: string;
     enable_deep_thinking?: boolean;
     enable_background_investigation: boolean;
+    enable_simple_research?: boolean;
     report_style?: "academic" | "popular_science" | "news" | "social_media";
     mcp_settings?: {
       servers: Record<
@@ -54,9 +55,28 @@ export async function* chatStream(
     });
     
     for await (const event of stream) {
+      let parsed: any = {};
+      try {
+        parsed = event?.data ? JSON.parse(event.data) : {};
+      } catch (e) {
+        console.warn("[chatStream] Failed to parse event data:", e, {
+          event: event?.event,
+          dataHead: String(event?.data ?? "").slice(0, 120),
+        });
+        parsed = {};
+      }
+      // Debug log for each SSE event
+      try {
+        console.debug("[chatStream] SSE", {
+          event: event?.event,
+          id: parsed?.id,
+          agent: parsed?.agent,
+          finish: parsed?.finish_reason,
+        });
+      } catch {}
       yield {
         type: event.event,
-        data: JSON.parse(event.data),
+        data: parsed,
       } as ChatEvent;
     }
   }catch(e){
@@ -193,3 +213,4 @@ let fastForwardReplaying = false;
 export function fastForwardReplay(value: boolean) {
   fastForwardReplaying = value;
 }
+

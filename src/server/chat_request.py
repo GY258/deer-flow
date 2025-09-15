@@ -65,6 +65,9 @@ class ChatRequest(BaseModel):
     enable_deep_thinking: Optional[bool] = Field(
         False, description="Whether to enable deep thinking"
     )
+    enable_simple_research: Optional[bool] = Field(
+        False, description="Whether to use simple research mode"
+    )
 
 
 class TTSRequest(BaseModel):

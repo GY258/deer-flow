@@ -41,7 +41,9 @@
       "maxStepsOfPlan": "Max steps of a research plan",
       "maxStepsDescription": "By default, each research plan has 3 steps.",
       "maxSearchResults": "Max search results",
-      "maxSearchResultsDescription": "By default, each search step has 3 results."
+      "maxSearchResultsDescription": "By default, each search step has 3 results.",
+      "simpleResearch": "Simple Research Mode",
+      "simpleResearchDescription": "Direct BM25 search for restaurant professional answers without complex planning process"
     },
     "mcp": {
       "title": "MCP Servers",
@@ -103,7 +105,12 @@
       },
       "enhancePrompt": "Enhance prompt with AI",
       "on": "On",
-      "off": "Off"
+      "off": "Off",
+      "simpleResearch": "Simple Research",
+      "simpleResearchTooltip": {
+        "title": "Simple Research Mode: {status}",
+        "description": "Direct BM25 search for restaurant professional answers without complex planning process"
+      }
     },
     "research": {
       "deepResearch": "Deep Research",

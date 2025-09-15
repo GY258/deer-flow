@@ -76,16 +76,18 @@ export const useStore = create<{
 
 export async function sendMessage(
   content?: string,
-  {
-    interruptFeedback,
-    resources,
-  }: {
-    interruptFeedback?: string;
-    resources?: Array<Resource>;
-  } = {},
-  options: { abortSignal?: AbortSignal } = {},
+  apiFunction?: (...args: any[]) => any,
+  options?: { abortSignal?: AbortSignal; resources?: Array<Resource>; interruptFeedback?: string; enableSimpleResearch?: boolean },
 ) {
+  console.log('🚀 sendMessage called:', {
+    content: content,
+    hasApiFunction: !!apiFunction,
+    options: options
+  });
+
+  const { interruptFeedback, resources, abortSignal, enableSimpleResearch } = options ?? {};
   if (content != null) {
+    console.log('📤 Adding user message to store');
     appendMessage({
       id: nanoid(),
       threadId: THREAD_ID,
@@ -96,39 +98,91 @@ export async function sendMessage(
     });
   }
 
-  const settings = getChatStreamSettings();
-  const stream = chatStream(
-    content ?? "[REPLAY]",
-    {
+  // 如果没有传入API函数，使用默认的chatStream
+  if (!apiFunction) {
+    const settings = getChatStreamSettings();
+    apiFunction = chatStream;
+    console.log('🔧 Using default chatStream with settings:', {
       thread_id: THREAD_ID,
-      interrupt_feedback: interruptFeedback,
-      resources,
-      auto_accepted_plan: settings.autoAcceptedPlan,
-      enable_deep_thinking: settings.enableDeepThinking ?? false,
-      enable_background_investigation:
-        settings.enableBackgroundInvestigation ?? true,
-      max_plan_iterations: settings.maxPlanIterations,
-      max_step_num: settings.maxStepNum,
-      max_search_results: settings.maxSearchResults,
-      report_style: settings.reportStyle,
-      mcp_settings: settings.mcpSettings,
-    },
-    options,
-  );
+      enable_simple_research: enableSimpleResearch ?? false,
+      settings: settings
+    });
+    
+    const stream = chatStream(
+      content ?? "[REPLAY]",
+      {
+        thread_id: THREAD_ID,
+        interrupt_feedback: interruptFeedback,
+        resources,
+        auto_accepted_plan: settings.autoAcceptedPlan,
+        enable_deep_thinking: settings.enableDeepThinking ?? false,
+        enable_background_investigation:
+          settings.enableBackgroundInvestigation ?? true,
+        enable_simple_research: enableSimpleResearch ?? false,
+        max_plan_iterations: settings.maxPlanIterations,
+        max_step_num: settings.maxStepNum,
+        max_search_results: settings.maxSearchResults,
+        report_style: settings.reportStyle,
+        mcp_settings: settings.mcpSettings,
+      },
+      { abortSignal },
+    );
+    console.log('🔄 Starting to process stream...');
+    await processStream(stream, interruptFeedback);
+  } else {
+    // 使用传入的API函数
+    console.log('🔧 Using custom API function');
+    const stream = apiFunction(content ?? "[REPLAY]", { abortSignal });
+    console.log('🔄 Starting to process custom stream...');
+    await processStream(stream, interruptFeedback);
+  }
+}
 
+async function processStream(stream: AsyncIterable<{ type: string; data: any }>, interruptFeedback?: string) {
+  console.log('🌊 processStream started with interruptFeedback:', interruptFeedback);
   setResponding(true);
   let messageId: string | undefined;
+  let eventCount = 0;
+  
   try {
     for await (const event of stream) {
-      const { type, data } = event;
+      eventCount++;
+      const type = (event as any)?.type;
+      // Defensive: normalize data
+      const data = (event as any)?.data ?? {};
+      console.log(`📡 Event #${eventCount}:`, {
+        type,
+        messageId: data?.id,
+        agent: data?.agent,
+        role: data?.role,
+        hasContent: !!data?.content,
+        hasReasoningContent: !!data?.reasoning_content,
+        finishReason: data?.finish_reason,
+        dataKeys: Object.keys(data ?? {})
+      });
+      
+      // Ensure message id exists to avoid crashes in downstream logic
       messageId = data.id;
+      if (!messageId) {
+        messageId = nanoid();
+        data.id = messageId;
+        console.warn("[processStream] Generated fallback message id:", messageId);
+      }
       let message: Message | undefined;
+      
       if (type === "tool_call_result") {
+        console.log('🔧 Processing tool_call_result:', data.tool_call_id);
         message = findMessageByToolCallId(data.tool_call_id);
-      } else if (!existsMessage(messageId)) {
+        console.log('🔍 Found tool call message:', message?.id);
+      } else if (messageId && !existsMessage(messageId)) {
+        console.log('🆕 Creating new message:', {
+          id: messageId,
+          agent: data.agent,
+          role: data.role
+        });
         message = {
           id: messageId,
-          threadId: data.thread_id,
+          threadId: data.thread_id ?? THREAD_ID,
           agent: data.agent,
           role: data.role,
           content: "",
@@ -136,29 +190,60 @@ export async function sendMessage(
           reasoningContent: "",
           reasoningContentChunks: [],
           isStreaming: true,
-          interruptFeedback,
+          interruptFeedback: interruptFeedback ?? undefined,
         };
         appendMessage(message);
+        console.log('✅ New message added to store');
       }
-      message ??= getMessage(messageId);
+      
+      if (!message && messageId) {
+        message = getMessage(messageId);
+        console.log('📝 Retrieved existing message:', message?.id);
+      }
+      
       if (message) {
-        message = mergeMessage(message, event);
+        console.log('🔄 Before merge:', {
+          messageId: message.id,
+          currentContent: message.content,
+          isStreaming: message.isStreaming
+        });
+        try {
+          message = mergeMessage(message, event as any);
+        } catch (e) {
+          console.error('[processStream] mergeMessage error', e, { type, id: message.id });
+          // Prevent stuck streaming state on merge failure
+          message.isStreaming = false;
+        }
         updateMessage(message);
+        
+        console.log('🔄 After merge:', {
+          messageId: message.id,
+          newContent: message.content,
+          isStreaming: message.isStreaming,
+          finishReason: message.finishReason
+        });
+      } else {
+        console.warn('⚠️ No message found for event:', { type, messageId });
       }
     }
-  } catch {
+    
+    console.log(`✅ Stream processing completed. Total events: ${eventCount}`);
+  } catch (error) {
+    console.error('❌ Error in processStream:', error);
     toast("An error occurred while generating the response. Please try again.");
     // Update message status.
     // TODO: const isAborted = (error as Error).name === "AbortError";
     if (messageId != null) {
       const message = getMessage(messageId);
       if (message?.isStreaming) {
+        console.log('🛑 Marking message as not streaming due to error');
         message.isStreaming = false;
         useStore.getState().updateMessage(message);
       }
     }
     useStore.getState().setOngoingResearch(null);
   } finally {
+    console.log('🏁 processStream finished, setting responding to false');
     setResponding(false);
   }
 }
@@ -187,30 +272,57 @@ function findMessageByToolCallId(toolCallId: string) {
 }
 
 function appendMessage(message: Message) {
+  console.log('📝 appendMessage called:', {
+    messageId: message.id,
+    agent: message.agent,
+    role: message.role,
+    content: message.content,
+    isStreaming: message.isStreaming
+  });
+
   if (
     message.agent === "coder" ||
     message.agent === "reporter" ||
-    message.agent === "researcher"
+    message.agent === "researcher" ||
+    message.agent === "simple_researcher" 
   ) {
+    console.log('🔬 Processing research-related message:', message.agent);
     if (!getOngoingResearchId()) {
+      console.log('🆕 Starting new research session');
       const id = message.id;
       appendResearch(id);
       openResearch(id);
+    } else {
+      console.log('📊 Continuing existing research session:', getOngoingResearchId());
     }
     appendResearchActivity(message);
   }
+  
+  console.log('💾 Adding message to store');
   useStore.getState().appendMessage(message);
+  console.log('✅ Message added to store successfully');
 }
 
 function updateMessage(message: Message) {
+  console.log('🔄 updateMessage called:', {
+    messageId: message.id,
+    agent: message.agent,
+    isStreaming: message.isStreaming,
+    content: message.content?.substring(0, 100) + (message.content?.length > 100 ? '...' : '')
+  });
+
   if (
     getOngoingResearchId() &&
     message.agent === "reporter" &&
     !message.isStreaming
   ) {
+    console.log('🏁 Research completed, clearing ongoing research');
     useStore.getState().setOngoingResearch(null);
   }
+  
+  console.log('💾 Updating message in store');
   useStore.getState().updateMessage(message);
+  console.log('✅ Message updated in store successfully');
 }
 
 function getOngoingResearchId() {
@@ -218,52 +330,96 @@ function getOngoingResearchId() {
 }
 
 function appendResearch(researchId: string) {
+  console.log('🔬 appendResearch called for:', researchId);
+  
   let planMessage: Message | undefined;
   const reversedMessageIds = [...useStore.getState().messageIds].reverse();
+  console.log('🔍 Searching for planner message in messages:', reversedMessageIds);
+  
   for (const messageId of reversedMessageIds) {
     const message = getMessage(messageId);
+    console.log('🔍 Checking message:', { messageId, agent: message?.agent });
     if (message?.agent === "planner") {
       planMessage = message;
+      console.log('✅ Found planner message:', planMessage.id);
       break;
     }
   }
+  
   const messageIds = [researchId];
-  messageIds.unshift(planMessage!.id);
-  useStore.setState({
+  if (planMessage) {
+    messageIds.unshift(planMessage.id);
+    console.log('📋 Added plan message to research:', planMessage.id);
+  } else {
+    console.log('⚠️ No planner message found, continuing without plan');
+  }
+  
+  const nextState: Record<string, unknown> = {
     ongoingResearchId: researchId,
     researchIds: [...useStore.getState().researchIds, researchId],
-    researchPlanIds: new Map(useStore.getState().researchPlanIds).set(
-      researchId,
-      planMessage!.id,
-    ),
     researchActivityIds: new Map(useStore.getState().researchActivityIds).set(
       researchId,
       messageIds,
     ),
-  });
+  };
+  
+  if (planMessage) {
+    nextState.researchPlanIds = new Map(
+      useStore.getState().researchPlanIds,
+    ).set(researchId, planMessage.id);
+  }
+  
+  console.log('💾 Setting research state:', nextState);
+  useStore.setState(nextState);
+  console.log('✅ Research state updated successfully');
 }
 
 function appendResearchActivity(message: Message) {
+  console.log('🔬 appendResearchActivity called for:', {
+    messageId: message.id,
+    agent: message.agent
+  });
+  
   const researchId = getOngoingResearchId();
+  console.log('🔍 Current ongoing research ID:', researchId);
+  
   if (researchId) {
     const researchActivityIds = useStore.getState().researchActivityIds;
-    const current = researchActivityIds.get(researchId)!;
+    const current = researchActivityIds.get(researchId);
+    
+    if (!current) {
+      console.log('⚠️ No research activity found for research ID:', researchId);
+      console.log('🔍 Available research activities:', Array.from(researchActivityIds.keys()));
+      return;
+    }
+    
+    console.log('📋 Current research activities:', current);
+    
     if (!current.includes(message.id)) {
+      console.log('➕ Adding message to research activities');
       useStore.setState({
         researchActivityIds: new Map(researchActivityIds).set(researchId, [
           ...current,
           message.id,
         ]),
       });
+      console.log('✅ Message added to research activities');
+    } else {
+      console.log('ℹ️ Message already in research activities');
     }
+    
     if (message.agent === "reporter") {
+      console.log('📊 Setting research report ID');
       useStore.setState({
         researchReportIds: new Map(useStore.getState().researchReportIds).set(
           researchId,
           message.id,
         ),
       });
+      console.log('✅ Research report ID set');
     }
+  } else {
+    console.log('ℹ️ No ongoing research, skipping activity append');
   }
 }
 

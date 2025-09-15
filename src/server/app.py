@@ -20,7 +20,7 @@ from psycopg_pool import AsyncConnectionPool
 from src.config.configuration import get_recursion_limit, get_bool_env, get_str_env
 from src.config.report_style import ReportStyle
 from src.config.tools import SELECTED_RAG_PROVIDER
-from src.graph.builder import build_graph_with_memory
+from src.graph.builder import build_graph_with_memory, build_simple_graph_with_memory
 from src.llms.llm import get_configured_llm_models
 from src.podcast.graph.builder import build_graph as build_podcast_graph
 from src.ppt.graph.builder import build_graph as build_ppt_graph
@@ -75,7 +75,7 @@ app.add_middleware(
 )
 in_memory_store = InMemoryStore()
 graph = build_graph_with_memory()
-
+simple_graph = build_simple_graph_with_memory()
 
 @app.post("/api/chat/stream")
 async def chat_stream(request: ChatRequest):
@@ -93,6 +93,8 @@ async def chat_stream(request: ChatRequest):
     if thread_id == "__default__":
         thread_id = str(uuid4())
 
+    selected_graph = simple_graph if request.enable_simple_research else graph
+    
     return StreamingResponse(
         _astream_workflow_generator(
             request.model_dump()["messages"],
@@ -107,6 +109,7 @@ async def chat_stream(request: ChatRequest):
             request.enable_background_investigation,
             request.report_style,
             request.enable_deep_thinking,
+            selected_graph, 
         ),
         media_type="text/event-stream",
     )
@@ -233,6 +236,12 @@ async def _process_message_chunk(message_chunk, message_metadata, thread_id, age
         else:
             # AI Message - Raw message tokens
             yield _make_event("message_chunk", event_stream_message)
+    else:
+        # Fallback: handle non-chunk BaseMessage (e.g., nodes that append AIMessage at once)
+        # Ensure the frontend treats this as a completed message
+        if "finish_reason" not in event_stream_message:
+            event_stream_message["finish_reason"] = "stop"
+        yield _make_event("message_chunk", event_stream_message)
 
 
 async def _stream_graph_events(
@@ -273,6 +282,7 @@ async def _astream_workflow_generator(
     enable_background_investigation: bool,
     report_style: ReportStyle,
     enable_deep_thinking: bool,
+    graph_instance= None,
 ):
     # Process initial messages
     for message in messages:
@@ -309,6 +319,8 @@ async def _astream_workflow_generator(
         "enable_deep_thinking": enable_deep_thinking,
         "recursion_limit": get_recursion_limit(),
     }
+     # 使用传入的graph_instance，如果没有则使用默认graph
+    selected_graph = graph_instance or graph
 
     checkpoint_saver = get_bool_env("LANGGRAPH_CHECKPOINT_SAVER", False)
     checkpoint_url = get_str_env("LANGGRAPH_CHECKPOINT_DB_URL", "")
@@ -326,8 +338,8 @@ async def _astream_workflow_generator(
             ) as conn:
                 checkpointer = AsyncPostgresSaver(conn)
                 await checkpointer.setup()
-                graph.checkpointer = checkpointer
-                graph.store = in_memory_store
+                selected_graph.checkpointer = checkpointer
+                selected_graph.store = in_memory_store
                 async for event in _stream_graph_events(
                     graph, workflow_input, workflow_config, thread_id
                 ):
@@ -338,8 +350,8 @@ async def _astream_workflow_generator(
             async with AsyncMongoDBSaver.from_conn_string(
                 checkpoint_url
             ) as checkpointer:
-                graph.checkpointer = checkpointer
-                graph.store = in_memory_store
+                selected_graph.checkpointer = checkpointer
+                selected_graph.store = in_memory_store
                 async for event in _stream_graph_events(
                     graph, workflow_input, workflow_config, thread_id
                 ):
@@ -347,7 +359,7 @@ async def _astream_workflow_generator(
     else:
         # Use graph without MongoDB checkpointer
         async for event in _stream_graph_events(
-            graph, workflow_input, workflow_config, thread_id
+            selected_graph, workflow_input, workflow_config, thread_id
         ):
             yield event
 
@@ -635,8 +647,17 @@ async def simple_research(request: ChatRequest):
         
         # 调用simple_researcher_node
         result = await simple_researcher_node(state, config)
+
+        # 从Command对象中提取更新内容
+        final_text = ""
+        try:
+            update_dict = getattr(result, "update", {}) or {}
+            if isinstance(update_dict, dict):
+                final_text = update_dict.get("final_report", "")
+        except Exception:
+            pass
         
-        return {"result": result.get("final_report", "")}
+        return {"result": final_text}
         
     except Exception as e:
         logger.exception(f"Error in simple research: {str(e)}")

@@ -18,7 +18,7 @@ import { fastForwardReplay } from "~/core/api";
 import { useReplayMetadata } from "~/core/api/hooks";
 import type { Option, Resource } from "~/core/messages";
 import { useReplay } from "~/core/replay";
-import { sendMessage, useMessageIds, useStore } from "~/core/store";
+import { sendMessage, useMessageIds, useStore, useSettingsStore } from "~/core/store";
 import { env } from "~/env";
 import { cn } from "~/lib/utils";
 
@@ -46,22 +46,26 @@ export function MessagesBlock({ className }: { className?: string }) {
       },
     ) => {
       const abortController = new AbortController();
-      abortControllerRef.current = abortController;
-      try {
-        await sendMessage(
-          message,
-          {
-            interruptFeedback:
-              options?.interruptFeedback ?? feedback?.option.value,
-            resources: options?.resources,
-          },
-          {
-            abortSignal: abortController.signal,
-          },
-        );
-      } catch {}
+    abortControllerRef.current = abortController;
+    
+    const settings = useSettingsStore.getState();
+    const isSimpleResearch = settings.general.enableSimpleResearch;
+    
+    try {
+      // 统一使用chatStream API，通过enableSimpleResearch参数控制模式
+      await sendMessage(
+        message,
+        undefined, // 使用默认的chatStream
+        {
+          abortSignal: abortController.signal,
+          resources: options?.resources,
+          interruptFeedback: options?.interruptFeedback,
+          enableSimpleResearch: isSimpleResearch,
+        }
+      );
+    } catch {}
     },
-    [feedback],
+    [],
   );
   const handleCancel = useCallback(() => {
     abortControllerRef.current?.abort();

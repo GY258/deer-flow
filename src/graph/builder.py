@@ -15,6 +15,7 @@ from .nodes import (
     reporter_node,
     research_team_node,
     researcher_node,
+    simple_researcher_node,
 )
 from .types import State
 
@@ -76,6 +77,21 @@ def build_graph_with_memory():
     builder = _build_base_graph()
     return builder.compile(checkpointer=memory)
 
+def build_simple_graph():
+    """Build and return a simple research graph."""
+    builder = StateGraph(State)
+    builder.add_edge(START, "simple_researcher")
+    builder.add_node("simple_researcher", simple_researcher_node)
+    return builder.compile()
+
+def build_simple_graph_with_memory():
+    """Build and return a simple research graph with memory."""
+    memory = MemorySaver()
+    builder = StateGraph(State)
+    builder.add_edge(START, "simple_researcher")
+    builder.add_node("simple_researcher", simple_researcher_node)
+    builder.add_edge("simple_researcher", END)
+    return builder.compile(checkpointer=memory)
 
 def build_graph():
     """Build and return the agent workflow graph without memory."""
