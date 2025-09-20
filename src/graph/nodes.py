@@ -553,170 +553,247 @@ async def researcher_node(
         tools,
     )
 
-async def simple_researcher_node(state: State, config: RunnableConfig):
-    """餐饮智能助手节点，使用BM25搜索解答餐饮相关问题"""
-    logger.info("餐饮智能助手节点运行中")
+def _process_bm25_results(raw_results: str, query: str) -> str:
+    """加工BM25搜索结果，提取文档标题和内容片段，让prompt更清晰"""
+    import re
     
+    # 如果搜索失败或无结果，直接返回
+    if "未找到" in raw_results or "搜索服务" in raw_results:
+        return raw_results
+    
+    try:
+        # 解析搜索结果
+        results = []
+        current_result = {}
+        
+        lines = raw_results.split('\n')
+        in_content_section = False
+        content_lines = []
+        
+        for line in lines:
+            line = line.strip()
+            if not line:
+                if in_content_section:
+                    content_lines.append('')
+                continue
+                
+            # 匹配结果标题
+            if line.startswith('## 结果'):
+                if current_result:
+                    # 保存之前的内容
+                    if content_lines:
+                        current_result['content'] = '\n'.join(content_lines).strip()
+                    results.append(current_result)
+                current_result = {}
+                in_content_section = False
+                content_lines = []
+            elif line.startswith('**标题**:'):
+                current_result['title'] = line.replace('**标题**:', '').strip()
+                in_content_section = False
+            elif line.startswith('**内容片段**:'):
+                # 开始内容片段部分
+                in_content_section = True
+                content_lines = []
+                # 如果标题行后面直接有内容，也要包含进来
+                content_after_colon = line.replace('**内容片段**:', '').strip()
+                if content_after_colon:
+                    content_lines.append(content_after_colon)
+            elif line.startswith('**路径**:'):
+                current_result['path'] = line.replace('**路径**:', '').strip()
+                in_content_section = False
+            elif line.startswith('**评分**:'):
+                current_result['score'] = line.replace('**评分**:', '').strip()
+                in_content_section = False
+            elif in_content_section:
+                # 在内容片段部分，收集所有行
+                content_lines.append(line)
+        
+        # 添加最后一个结果
+        if current_result:
+            # 保存最后的内容
+            if content_lines:
+                current_result['content'] = '\n'.join(content_lines).strip()
+            results.append(current_result)
+        
+        # 格式化加工后的结果
+        if not results:
+            return f"未找到与 '{query}' 相关的文档内容"
+        
+        # 限制最多两个文档
+        limited_results = results[:2]
+        
+        formatted_results = []
+        formatted_results.append(f"📚 找到 {len(limited_results)} 个相关文档：")
+        formatted_results.append("")
+        for i, result in enumerate(limited_results, 1):
+            # 使用解析出的路径作为标题，如果没有路径则使用原标题
+            title = result.get('path', result.get('title', '未知标题'))
+            content = result.get('content', '')
+            
+            formatted_results.append(f"### 文档 {i}: {title}")
+            if content:
+                # 清理内容片段，移除多余的空白和特殊字符
+                cleaned_content = re.sub(r'\s+', ' ', content).strip()
+                # 限制内容长度，避免prompt过长
+                if len(cleaned_content) > 500:
+                    cleaned_content = cleaned_content[:500] + "..."
+                formatted_results.append(f"**内容**: {cleaned_content}")
+            else:
+                formatted_results.append("**内容**: 无相关内容片段")
+            formatted_results.append("")
+        
+        return "\n".join(formatted_results)
+        
+    except Exception as e:
+        logger.error(f"加工BM25搜索结果失败: {e}")
+        # 如果加工失败，返回原始结果
+        return raw_results
+
+async def simple_researcher_node(state: State, config: RunnableConfig) -> Command[Literal["__end__"]]:
+    """餐饮智能助手节点（planner 同款模式）：内部流式迭代，聚合后一次性返回。"""
+    logger.info("餐饮智能助手节点运行中 (planner-style)")
     configurable = Configuration.from_runnable_config(config)
-    
-    # 获取用户查询
-    query = state.get("research_topic", "")
-    locale = state.get("locale", "zh-CN")
-    
+
+    # 1) 读取输入
+    query = state.get("research_topic", "") or ""
+    locale = state.get("locale", "zh-CN") or "zh-CN"
     logger.info(f"用户查询: {query}")
     logger.info(f"用户语言: {locale}")
-    
-    # 使用BM25搜索获取相关信息
+
+    # 2) 先发送搜索状态消息
+    search_status_message = AIMessage(
+        content="🔍 正在搜索内部文档...",
+        name="simple_researcher"
+    )
+
+    # 3) BM25 搜索
     search_results = ""
+    found_files = []
     try:
         from src.tools.bm25_search import bm25_search_tool
         logger.info("正在执行BM25搜索...")
-        
-        # 执行BM25搜索，获取更多相关结果
         search_results = bm25_search_tool.invoke(query, limit=2, include_snippets=True)
         logger.info(f"BM25搜索完成，结果长度: {len(str(search_results))}")
         logger.debug(f"BM25搜索结果: {search_results}")
         
+        search_results = _process_bm25_results(search_results, query)
+        logger.info(f"加工后的搜索结果: {search_results}")
+        # 提取文件名（从搜索结果中解析）
+        import re
+        import os
+        # 从搜索结果中提取路径并转换为文件名
+        path_matches = re.findall(r'\*\*路径\*\*: (.+)', search_results)
+        found_files = [os.path.basename(path) for path in path_matches[:2]]  # 最多显示2个文件
+        
     except Exception as e:
         logger.error(f"BM25搜索失败: {e}", exc_info=True)
-        search_results = f"搜索服务暂时不可用: {str(e)}"
+        search_results = f"搜索服务暂时不可用: {e}"
+
+    # 4) 发送搜索结果消息
     
-    # 生成餐饮专业解答
-    logger.info("开始构建提示消息...")
-    report_messages = [
-        {
-            "role": "system", 
-            "content": f"""你是一个专业的餐饮智能助手，专门为餐饮行业提供专业的解答和指导。
+    
+    files_info = ""
+    if found_files:
+        files_info = f"\n📄 搜索到的文件：\n" + "\n".join([f"- {file}" for file in found_files])
+    else:
+        files_info = "\n📄 未找到相关文件"
 
-你的专业领域包括：
-🍽️ 菜品制作：
-- 菜品SOP和标准操作程序
-- 菜品制作流程和工艺标准
-- 菜品配方和配料清单
-- 菜品质量控制标准
-- 菜品成本核算和定价
-- 菜品营养分析和标签
+    search_result_message = AIMessage(
+        content=f"✅ 搜索完成{files_info}",
+        name="simple_researcher"
+    )
 
-👥 公司管理：
-- 公司企业文化和价值观
-- 公司组织架构和部门职责
-- 公司管理制度和流程
-- 公司发展战略和规划
-- 公司品牌形象和宣传资料
+    # 5) 构造提示消息（与原始一致）
 
-📚 培训指导：
-- 各岗位培训教材和手册
-- 新员工入职培训资料
-- 专业技能培训课程
-- 安全操作培训指南
-- 服务标准培训材料
-- 管理岗位培训内容
 
-🔧 操作流程：
-- 厨房操作流程和规范
-- 设备使用和维护指南
-- 食品安全操作程序
-- 清洁卫生标准流程
-- 库存管理和采购流程
-- 客户服务标准流程
+    system_content = f"""你是一个专业的餐饮智能助手，专门为餐饮行业员工和店长提供专业的解答和指导。"""
+    user_content = f"""
+    回答要求：
+    1. 判断用户的问题是要做什么
+    2. 基于提供的文档，是否与用户的问题有关，如果有关需要利用文档进行回答，如果无关则直接回答用户问题。
+    3. 为用户提供具体、详细的可操作，系统性的建议和指导
+    4. 可以说明并提供行业这类问题的专业解答建议
+    5. 使用语言：{locale}
+    6. 结构清晰，重点突出
+    7.注意：
+    - 不要建议破坏菜品原味的方法。
+    - 提供的操作建议必须遵循餐饮行业标准和食材使用规范。
+    - 无关文档不需要提及
 
-回答要求：
-1. 基于提供的内部文档信息进行专业解答
-2. 提供具体、可操作的建议和指导
-3. 使用专业但易懂的语言
-4. 如果信息不足，请明确说明并提供一般性建议
-5. 使用语言：{locale}
-6. 结构清晰，重点突出"""
-        },
-        {
-            "role": "user", 
-            "content": f"""用户问题：{query}
+    用户问题：{query}
+    相关内部文档信息：
+    {search_results}
 
-相关内部文档信息：
-{search_results}
+    请基于以上内部文档信息，为用户提供专业的餐饮解答和指导。如果文档中有相关信息，请重点引用，且不要更改文档里的内容比如盐的用量或者食材的用量；如果找不到答案，就说明文件中没有相关信息，不要编造"""
+    # system_content = f"""你是餐饮行业资深厨师，熟悉各类菜品操作流程、调味比例和烹饪规范。"""
+    # user_content = f"""
+    # 回答结构示例：
+    # 1. 用户意图分析：简述用户想解决的核心问题
+    # 2. 文档相关性判断：文档中是否包含相关信息
+    # 3. 专业指导：
+    #     - 如果文档提供了解决方案，严格引用文档
+    #     - 如果文档无解，说明“文档未提供方案”，可给出一般性安全建议，但不得改变菜品味道
+    # 4. 行业专业提示：解释为什么这样处理更安全/规范
+    # 5. 使用语言：{locale}
+    # 6. 注意：
+    # - 不要建议破坏菜品原味的方法（如加水稀释高汤、随意改变调味比例）。
+    # - 如果文档中没有明确解决方案，模型应说明“文档中未提供解决方案”，而不是凭经验或常识随意推测。
+    # - 提供的操作建议必须遵循餐饮行业标准和食材使用规范。
 
-请基于以上内部文档信息，为用户提供专业的餐饮解答和指导。如果文档中有相关信息，请重点引用；如果信息不足，请提供基于餐饮行业最佳实践的建议。"""
-        }
+    # 用户问题：{query}
+    # 相关内部文档信息：
+    # {search_results}
+
+    # 请基于以上内部文档信息，为用户提供专业的餐饮解答和指导。如果文档中有相关信息，请重点引用，且不要更改文档里的内容比如盐的用量或者食材的用量；如果找不到答案，就说明文件中没有相关信息，不要编造"""
+    
+    from langchain_core.messages import SystemMessage as _SystemMessage
+    invoke_messages = [
+        _SystemMessage(content=system_content),
+        HumanMessage(content=user_content),
     ]
-    
-    logger.info(f"提示消息构建完成，消息数量: {len(report_messages)}")
-    
-    # 生成专业解答
-    final_answer = ""
-    try:
-        logger.info("开始调用LLM生成专业解答...")
-        logger.info(f"使用的LLM类型: {AGENT_LLM_MAP['reporter']}")
-        
-        # 参考coordinator_node的方式，直接调用LLM
-        # 将report_messages转换为LangChain消息格式
-        from langchain_core.messages import SystemMessage, HumanMessage as _HumanMessage
-        langchain_messages = []
-        
-        for msg in report_messages:
-            if msg["role"] == "system":
-                langchain_messages.append(SystemMessage(content=msg["content"]))
-            elif msg["role"] == "user":
-                langchain_messages.append(_HumanMessage(content=msg["content"]))
-        
-        logger.info(f"转换后的消息数量: {len(langchain_messages)}")
-        # 使用流式优先，便于前端看到过程输出
-        logger.info("开始直接调用LLM（流式）...")
-        logger.info("---------..")
-        llm = get_llm_by_type(AGENT_LLM_MAP["reporter"])
-        # 尝试流式调用
-        stream_success = False
-        try:
-            for chunk in llm.stream(langchain_messages):
-                if getattr(chunk, "content", None):
-                    content = chunk.content
-                    if isinstance(content, str):
-                        final_answer += content
-            stream_success = True
-        except Exception as stream_err:
-            logger.info(f"LLM流式调用失败，将回退到invoke: {stream_err}")
-        # 回退策略：若流式失败或无内容，则尝试非流式
-        if not stream_success or not final_answer:
-            logger.info("执行invoke回退策略...")
-            try:
-                resp = llm.invoke(langchain_messages)
-                resp_content = getattr(resp, "content", None)
-                final_answer = resp_content if isinstance(resp_content, str) else ""
-                if not final_answer and getattr(resp, "tool_calls", None):
-                    logger.warning(f"LLM返回了tool_calls且无纯文本: {resp.tool_calls}")
-                    final_answer = "抱歉，本次回答为空（模型尝试了工具调用输出）。"
-            except Exception as invoke_err:
-                logger.error(f"LLM invoke调用也失败: {invoke_err}", exc_info=True)
-                final_answer = f"抱歉，生成解答时出现错误: {str(invoke_err)}"
-        
-        logger.info(f"LLM调用完成，响应内容长度: {len(final_answer) if final_answer else 0}")
-        
-    except Exception as llm_error:
-        logger.error(f"LLM调用异常: {llm_error}", exc_info=True)
-        final_answer = f"抱歉，生成解答时出现错误: {str(llm_error)}"
+    logger.info(f"提示消息: {user_content}")
+    logger.info(f"提示消息就绪，数量: {len(invoke_messages)}")
 
-    logger.info(f"专业解答生成完成，答案长度: {len(final_answer)}")
-    logger.debug(f"生成的答案: {final_answer}")
-    
-    # 记录查询统计
-    query_stats = {
-        "query": query,
-        "locale": locale,
-        "search_successful": "BM25搜索" in str(search_results) and "失败" not in str(search_results),
-        "answer_generated": "错误" not in final_answer,
-        "search_results_length": len(str(search_results)),
-        "final_answer_length": len(final_answer) if final_answer else 0
+    # 6) 选择模型（与 reporter/planner 风格一致）
+    llm = get_llm_by_type(AGENT_LLM_MAP["reporter"])
+    logger.info(f"开始流式生成专业解答，LLM: {AGENT_LLM_MAP['reporter']}")
+
+    # 7) 内部流式 -> 聚合 -> 一次性写回（与 planner_node 行为对齐）
+    response_content = ""
+    try:
+        # 注：如果你前端订阅了 LLM 的 token 事件，这里会实时吐；仅订阅 values 则最后一次性更新
+        for chunk in llm.stream(invoke_messages):
+            if getattr(chunk, "content", None):
+                response_content += chunk.content
+
+        if not response_content:
+            logger.warning("流式内容为空，回退到 invoke()")
+            resp = llm.invoke(invoke_messages)
+            response_content = getattr(resp, "content", "") or ""
+            if not response_content and getattr(resp, "tool_calls", None):
+                logger.warning(f"模型返回 tool_calls 无纯文本: {resp.tool_calls}")
+                response_content = "抱歉，本次回答为空（模型尝试了工具调用输出）。"
+
+    except Exception as e:
+        logger.error(f"LLM 调用异常: {e}", exc_info=True)
+        response_content = f"抱歉，生成解答时出现错误: {e}"
+
+    logger.info(f"simple_researcher 响应长度: {len(response_content)}")
+
+    # 8) 一次性写回消息 & 状态（和 planner_node 一致的返回风格）
+    # return Command(
+    #     update={
+    #         "messages": [
+    #             AIMessage(content=response_content, name="coordinator")  # 最终回答
+    #         ],
+    #     }
+    # )
+    return Command(
+    update={
+        "final_report": response_content,  # 需要保存就放这里；或干脆不保存
     }
-    logger.info(f"查询处理完成: {query_stats}")
-    
-    # 返回字典格式，像reporter_node一样，这样前端就能看到流式输出了
-    # return {
-    #     "final_report": final_answer,
-    #     "messages": [AIMessage(content=final_answer, name="reporter")],
-    # }
-    return {
-          "final_report": final_answer,
-    "messages": [AIMessage(content=final_answer, name="simple_researcher")],
-        }
+)
+
 
 async def coder_node(
     state: State, config: RunnableConfig

@@ -25,17 +25,22 @@ export function ResearchBlock({
   researchId: string | null;
 }) {
   const t = useTranslations("chat.research");
+  
+  // 检查是否为简单研究模式
+  const isSimpleResearchMode = researchId === "simple-research-mode";
+  
   const reportId = useStore((state) =>
-    researchId ? state.researchReportIds.get(researchId) : undefined,
+    researchId && !isSimpleResearchMode ? state.researchReportIds.get(researchId) : undefined,
   );
-  const [activeTab, setActiveTab] = useState("activities");
+  const [activeTab, setActiveTab] = useState(isSimpleResearchMode ? "report" : "activities");
   const hasReport = useStore((state) =>
-    researchId ? state.researchReportIds.has(researchId) : false,
+    researchId && !isSimpleResearchMode ? state.researchReportIds.has(researchId) : isSimpleResearchMode,
   );
   const reportStreaming = useStore((state) =>
-    reportId ? (state.messages.get(reportId)?.isStreaming ?? false) : false,
+    reportId ? (state.messages.get(reportId)?.isStreaming ?? false) : isSimpleResearchMode,
   );
   const { isReplay } = useReplay();
+  
   useEffect(() => {
     if (hasReport) {
       setActiveTab("report");
@@ -197,13 +202,28 @@ export function ResearchBlock({
               scrollShadowColor="var(--card)"
               autoScrollToBottom={!hasReport || reportStreaming}
             >
-              {reportId && researchId && (
-                <ResearchReportBlock
-                  className="mt-4"
-                  researchId={researchId}
-                  messageId={reportId}
-                  editing={editing}
-                />
+              {isSimpleResearchMode ? (
+                // 简单研究模式的特殊内容
+                <div className="mt-4">
+                  <div className="px-4 py-8 text-center text-muted-foreground">
+                    <div className="mb-4 text-4xl">🍽️</div>
+                    <div className="text-xl font-medium mb-2">餐饮智能助手已启用</div>
+                    <div className="text-sm">请发送您的问题，我将为您提供专业的餐饮解答</div>
+                    <div className="mt-4 text-xs opacity-75">
+                      支持菜品制作、公司管理、培训指导、操作流程等专业领域
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                // 正常的研究报告
+                reportId && researchId && (
+                  <ResearchReportBlock
+                    className="mt-4"
+                    researchId={researchId}
+                    messageId={reportId}
+                    editing={editing}
+                  />
+                )
               )}
             </ScrollContainer>
           </TabsContent>

@@ -146,6 +146,7 @@ function MessageListItem({
       message.agent === "coordinator" ||
       message.agent === "planner" ||
       message.agent === "podcast" ||
+      message.agent === "simple_researcher" ||
       startOfResearch
     ) {
       let content: React.ReactNode;
@@ -167,6 +168,25 @@ function MessageListItem({
             <PodcastCard message={message} />
           </div>
         );
+      } else if (message.agent === "simple_researcher") {
+        content = message.content ? (
+          <div className={cn("flex w-full px-4", className)}>
+            <MessageBubble message={message}>
+              <div className="flex w-full flex-col break-words">
+                <Markdown
+                  className={cn(
+                    message.role === "user" &&
+                      "prose-invert not-dark:text-secondary dark:text-inherit",
+                  )}
+                  animated
+                  checkLinkCredibility
+                >
+                  {message.content}
+                </Markdown>
+              </div>
+            </MessageBubble>
+          </div>
+        ) : null;
       } else if (startOfResearch) {
         content = (
           <div className="w-full px-4">

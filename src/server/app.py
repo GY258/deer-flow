@@ -368,6 +368,27 @@ def _make_event(event_type: str, data: dict[str, any]):
     if data.get("content") == "":
         data.pop("content")
     # Ensure JSON serialization with proper encoding
+     # 添加详细的日志记录
+    thread_id = data.get("thread_id", "unknown")
+    agent = data.get("agent", "unknown")
+    message_id = data.get("id", "unknown")
+    content_preview = ""
+    
+    if "content" in data and data["content"]:
+        content_preview = str(data["content"])[:100] + "..." if len(str(data["content"])) > 100 else str(data["content"])
+    
+    logger.info(
+        f"🚀 Sending event to frontend - "
+        f"Type: {event_type}, "
+        f"Thread: {thread_id}, "
+        f"Agent: {agent}, "
+        f"MessageID: {message_id}, "
+        f"Content: {content_preview}"
+    )
+    
+    # 打印完整的消息数据用于调试
+
+    
     try:
         json_data = json.dumps(data, ensure_ascii=False)
 
@@ -608,57 +629,3 @@ async def config():
         models=get_configured_llm_models(),
     )
 
-@app.post("/api/simple-research")
-async def simple_research(request: ChatRequest):
-    """直接调用simple_researcher_node的端点"""
-    try:
-        from src.graph.nodes import simple_researcher_node
-        from src.config.configuration import Configuration
-        
-        # 获取用户查询内容
-        if not request.messages:
-            raise HTTPException(status_code=400, detail="No messages provided")
-        
-        # 获取最后一条消息的内容
-        last_message = request.messages[-1]
-        if isinstance(last_message.content, str):
-            query_content = last_message.content
-        else:
-            # 如果content是列表，提取文本内容
-            query_content = ""
-            for item in last_message.content:
-                if hasattr(item, 'text') and item.text:
-                    query_content += item.text
-        
-        # 准备状态
-        state = {
-            "research_topic": query_content,
-            "locale": "zh-CN"
-        }
-        
-        # 准备配置 - 修复：直接传递字典格式
-        config = {
-            "configurable": {
-                "max_plan_iterations": 1,
-                "max_step_num": 3,
-                "max_search_results": 5
-            }
-        }
-        
-        # 调用simple_researcher_node
-        result = await simple_researcher_node(state, config)
-
-        # 从Command对象中提取更新内容
-        final_text = ""
-        try:
-            update_dict = getattr(result, "update", {}) or {}
-            if isinstance(update_dict, dict):
-                final_text = update_dict.get("final_report", "")
-        except Exception:
-            pass
-        
-        return {"result": final_text}
-        
-    except Exception as e:
-        logger.exception(f"Error in simple research: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))

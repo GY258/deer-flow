@@ -1,0 +1,1243 @@
+2025-09-19 04:19:52,225 - __main__ - INFO - Starting DeerFlow API server on 0.0.0.0:8000
+2025-09-19 04:19:56,629 - src.graph.checkpoint - WARNING - Checkpoint saver is disabled
+2025-09-19 04:19:56,631 - src.server.app - INFO - Allowed origins: ['http://app.lerna-ai.com', 'https://app.lerna-ai.com']
+INFO:     Started server process [9]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:38286 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     172.19.0.1:57766 - "GET /api/config HTTP/1.0" 200 OK
+INFO:     172.19.0.1:57780 - "POST /api/chat/stream HTTP/1.0" 200 OK
+2025-09-19 04:20:51,336 - src.config.configuration - INFO - Recursion limit set to: 25
+2025-09-19 04:20:51,339 - src.graph.nodes - INFO - 餐饮智能助手节点运行中 (planner-style)
+2025-09-19 04:20:51,339 - src.graph.nodes - INFO - 用户查询: 藕汤有点咸了怎么办？
+2025-09-19 04:20:51,339 - src.graph.nodes - INFO - 用户语言: zh-CN
+2025-09-19 04:20:51,355 - src.graph.nodes - INFO - 正在执行BM25搜索...
+2025-09-19 04:20:51,356 - src.tools.decorators - INFO - Tool bm25_search_tool called with parameters: 藕汤有点咸了怎么办？
+2025-09-19 04:20:51,389 - src.tools.decorators - INFO - Tool bm25_search_tool returned: 🔍 搜索: '藕汤有点咸了怎么办？' (用时: 0.028秒)
+📊 找到 3 个结果
+
+## 结果 1
+**标题**: 慢吊底汤：高温蒸汽3 面循环熬煮9 小时，
+**评分**: 43.192
+**路径**: /app/documents/藕汤煨制七步曲.txt
+**内容片段**: 慢吊底汤：高温蒸汽3 面循环熬煮9 小时，
+操作步骤：骨头水比例1:7 ，130 度高温蒸汽，骨头化渣，拒绝骨头重复熬汤。
+技术壁垒：130 度高温蒸汽3 面循环熬煮9 小时一次成汤，骨头化渣，拒绝骨头重复使用。
+
+筒骨风味塑造黄金8 小时：新鲜筒子骨，低温2 度，海盐腌制8 小时，肉质紧实有弹性，风味更独
+特。
+黄金8 小时后，冲洗盐份
+
+爆炒筒子骨：猛火爆炒筒子骨，激发肉香。
+
+高压急速焖藕：骨头底汤炖藕，让藕粉糯，高压循环焖制，打开莲藕气孔，释
+放铁元素，吸收油脂。
+
+捶打藕泥：古法捶打藕泥
+
+当日清晨煨汤：把底汤、藕、筒子骨、藕泥按比例放进恒温罐，慢煨3.5 小时。
+
+加汤不加水：煨汤过程中汤汁蒸发，加入焖煮藕的底汤，让底汤和藕汤保持一定浓度，整个煨汤期间不加水，香
+浓健康。
+
+
+
+## 结果 2
+**标题**: 简子骨
+**评分**: 35.059
+**路径**: /app/documents/铫子筒骨煨藕汤.txt
+**内容片段**: 铫子筒骨煨藕汤产品标准
+味型：咸鲜藕香
+
+目录
+验收标准
+
+切配标准
+
+操作标准
+
+注意事项
+
+常见问题
+
+来菜
+
+1 验收标准
+简子骨:
+品名：冻猪后棒骨，冷冻产品，26根/10千克/件，-18℃冷冻保存12个月，验收注意保质期，动物检疫合格证，冷冻情况
+棒骨大头480*550克，小头320*400克，瘦肉颜色红润，鲜亮，如瘦肉发白微黄则为僵尸肉
+
+不符合标准：包装不完整，原料已解冻，不在保质期内，棒骨颜色发白瘦肉发干
+
+腌制盐:
+品名：粤盐腌制盐，包装完整，1千克/包；防潮、防热、避光环境下保质期5年
+
+不符合标准：包装不完整
+
+2 切配标准 藕块改刀标准
+图① 图② 图③ 图④
+
+图①：藕节去皮真空包装无漏气
+图②：检查标签，粉藕，3kg/包，真空冷藏15天，0-5摄氏度保存
+图③：将藕节取出，切掉2头0.5cm以上，然后将藕对破成两半，取半边再对破切开（1开4），顶刀切2.5cm*3cm段，藕块大小约25~30克，冲洗干净沥干水冷藏保存
+图④：切掉的碎末，藕节两头的片冷藏保存做藕泥使用
+
+3 操作标准
+调味粉加工流程
+图①大盒 图②小盒 图③大盒 图④小盒
+
+黑胡椒标准版
+图① 大盒装11克
+原料比例：
+黑胡椒粉1：西湖味精4：家乐鸡粉6
+
+黑胡椒减少版
+图② 小盒装10.7克
+原料比例：
+黑胡椒粉0.7：西湖味精4：家乐鸡粉6
+
+深圳白胡椒粉标准：
+小盒装8.5克
+原料比例：
+白胡椒粉0.5克：西湖味精3克
+家乐鸡粉5克
+
+黑胡椒外卖版
+图③ 大盒装10克
+原料比例：
+西湖味精4：家乐鸡粉6
+图④ 小盒装1克
+黑纯胡椒粉
+
+筒子骨加工流程①
+图①
+图②
+图③
+
+大 480~550 克
+小 320~400 克
+
+图①: 第一天将送来的筒子骨自然解冻，有条件冷藏解冻（如部分门店放一晚上没解冻第二天腌制前可冲水使其解冻后再腌制），解冻后大火 480~550 克，小头 320~400 克，1 件 26 根
+图②: 容器内放入解冻好的 2 件筒子骨，撒上 1600 克腌制盐（粤盐腌制盐 1kg/袋）
+图③: 带上手套（避免骨头划伤手）搅拌揉搓 3 分钟，使筒子骨粘上盐
+图④: 揉搓好的骨头，找保鲜盒将骨头挑出放入保鲜盒，剩余盐洒在表层，封膜加盖放入冷藏冰箱，冷藏保存腌制 7 小时
+晚上腌制方案: 晚上来的骨头冲水解冻挤干水分，下班前腌制，1 件（26 根）放腌制盐 800 克进行腌制，切记早上来先将腌制好的筒子骨倒入水池淘洗完（每个池子最大装 8 分满），再用流水冲 1 小时（注意冲水过程中多次搅动或者买水管插到骨头底部冲水，让水流动起来，避免骨头咸味）
+
+筒子骨加工流程②
+图①
+图②
+图③
+图④
+图⑤
+
+图①: 将冷藏保存在冰箱内腌制满7小时的筒子骨拿出，水池放清水筒子骨放入清洗后浸泡1小时，捞出再次清洗后沥水
+图②: 锅内放凉水，白酒200克，将清洗干净的筒子骨放入（凉水余水），水没过筒子骨，大火加热
+图③: 余筒骨：大火烧开撇去浮沫，转小火煮30分钟，直到大骨头不冒血水后即可
+图④: 将煮透的筒子骨捞出，清水冲洗2遍，将骨头余水时刀口和骨头缝渗出的凝结血块清洗干净
+
+筒子骨加工流程③
+图①
+图②
+图③
+图④
+图⑤
+
+图①：将锅洗净，加入猪油500克大火烧热化开
+图②：锅内依次下入肥膘肉200克，小火煸炒出油，肥膘煸炒出香味，颜色煸炒金黄
+图③：锅内再次下入生姜片150克，小火继续煸炒，直到生姜香味突出，姜片发干收缩
+图④：锅内下入腊肉片150克，小火煸炒出油，表层收缩，微干微焦出香味，复合香气浓郁，炒料过程约6~7分钟
+图⑤：然后下入清洗干净的筒子骨1件26根（单锅最多可炒26~30根）
+
+备注：万象城电灶15千瓦，单锅最大炒制35~40根
+
+筒子骨加工流程④
+图①
+图②
+图③
+图④
+
+图①：刚放入筒子骨水汽大，可用中大火快速收干水汽
+图②：锅内水汽减少油温升高，转中小火继续炒，可用锅铲快速搅拌，避免糊锅粘锅
+图③：中小火继续炒，直到骨头上的肉明显收缩紧实，表面颜色微黄，肉香焦香即可（这个过程约6~7分钟）
+图④：取50不锈钢桶，将炒好的筒子骨和辅料一起打入，锅内留下炒过骨头的油，继续炒第二锅，按照之前步骤重复炒制（此时不用再加油，第二批炒直接放腊肉姜片肥膘），直到最后一锅结束，油留下第二天继续使用。（油重复使用最多3天）
+
+筒子骨加工流程⑤
+50cm
+
+图①
+图②
+
+注意事项：
+图①：锅不锈钢桶统一规格直径50cm，每家门店购买2只（如已经有60桶，也按照50桶标准使用）
+图②：每桶最大装6件炒好筒子骨（150-160根），加入高汤汤没过骨头5~10cm，大火烧开后计时，大火煮20分钟关火，打出表层浮油和残渣，然后立刻捞出骨头放入白色管内沥水，再倒入托盘摊凉自然冷却，盖上纱布避免表层风干氧化变黑，彻底凉透后（温度计插入骨头内部温度低于30℃）放入冷藏冰箱保存（没凉透放冰箱有食安风险）；桶内骨头汤用密漏漏掉残渣，打掉表层黑油丢弃，剩余汤第二天压痛快使用。（煮筒骨汤不可重复使用避免成）
+
+流程注意项：
+方案①：C类门店筒子骨按今天到货常温解冻；明天早上腌制冷藏，下午冲水，余水，炒制，煮，放凉，冷藏；后天使用
+方案②：B/A类店筒子骨按今天到货一半按原方案①执行，另一半冲水解冻，当天下班前腌制（1件骨头800克腌制盐）；明天早上冲水，余水，炒制，煮，放凉，冷藏当天或者后天使用（减少晚上加工的压力，避免晚上加工太多不凉不能放冰箱冷藏）
+
+藕块加工流程
+图1
+图2
+图3
+图4
+图5
+
+图①: 将藕节取出，切掉2头0.5cm以上，然后将藕对破成两半，取半边再对破切开，顶刀切2.5cm3cm段，藕块大小约25~30克，冲洗干净沥干水冷藏保存
+图②: 水池内放入切好的藕块（7~8包3kg藕节改刀后藕块40斤左右，藕泥原料约9斤），加入400克盐（1斤藕块放10克盐）（夏季新藕40斤放500克），戴手套搓3~5分钟
+图③: 搓至藕块圆角，表层起毛出水即可，腌制15分钟
+图④: 腌制15分钟后的藕块会变软，放水没过藕块，快速清洗藕块表层盐分，清洗干净快速捞出，避免水长时间浸泡藕块（水多一些清洗干净盐分避免会咸）
+图⑤: 将清洗干净的藕块加入高压锅，加入加工简单后剩余的高汤，汤没过藕块，加入猪油360克，大火烧开上汽压20~25分钟，关火放在灶上余温继续焖20分钟（根据季节不同，藕块焖时间会有所调整具体时间看群内通知），即可使用
+
+藕泥加工流程①
+图①
+图②
+图③
+图④
+图⑤
+
+图①：将藕节切掉2头边角料
+图②：收集边角料做为压藕泥原料，冷藏保存
+图③：倒入水池加清水，水没过藕边角料，淘洗干净沥水备用
+图④：将清洗干净的藕泥块放入高压锅中，加入高汤浸过藕块，藕泥不用放猪油
+图⑤：盖上锅盖大火烧开，高压锅上气后改中小火压制40分钟以上，压好后的藕泥块不开盖，静置到次日使用
+注意：第二天早上早班时打开锅盖，查看一下里面汤量是否没过藕块，如果不够在加入适量的高汤，锅上高压锅锅盖，大火烧开压制上气后关火，继续放在灶台，让余温继续焖制，蒸汽自然冷却消减
+
+藕泥加工流程②
+图①
+图②
+图③
+图④
+图⑤
+
+图①: 次日早班将高压锅藕泥烧开上汽后自然冷却，气阀不冒气后打开锅盖
+图②: 打开锅盖，检查藕块颜色，标准是土黄色（如颜色不是土黄色，颜色发白是氧化时间不够，解决办法：开盖让原料与空气接触自然氧化）
+图③: 将藕藕泥块放入破壁料理机中（每400克藕块，放入压藕原汤汤汁500克，藕和原汤比例0.8:1），盖上破壁机上盖，将搅拌棍插入，打开破壁机电源开关，将转速调节至慢速40秒，将藕块打碎成泥，再将转速调到高速，运行40秒后停机，将打好的藕泥倒入保鲜盒中备用
+图④⑤: 破壁机打好的藕泥无颗粒感，细腻，有一定粘稠度，用勺子舀起倒出时，流动丝滑不断线
+注意点: 打好的藕泥直接使用，当餐使用，用多少打多少，禁止上午打下午用
+
+皮冻加工流程①
+图① 图② 图③ 图④
+
+图①：猪皮10斤凉水下锅，加入白酒100克，大葱段100克，生姜片100克，大火烧开撇去浮沫煮10分钟完全熟透备用
+图②：将煮熟的猪皮捞出清洗干净
+图③：用刀片去表面肥肉油脂、肥肉油脂必须去除干净，如果猪皮毛多的话用小火枪烧制表面猪毛，避免后期有残渣和发腥
+图④：放置高压锅加入姜片100克、干花椒5克（压制时1斤猪皮3斤水），大火烧开上气；转小火压制30分钟关火
+
+皮冻加工流程②
+图① 图② 图③ 图④
+
+图①：压好的猪皮与原汤按1：1.3-1.5比例加工，将500克猪皮兑650-750克原汤倒入榨汁机进行全程高速打60秒
+图②：打好的皮冻浆倒出，因为有杂质残渣、猪毛，所以必须用纱布进行过滤
+图③：将过滤好的皮冻浆倒入保鲜盒自然放凉，也可以用风吹但是一定要完全凉透，然后进冰箱冷藏保存
+图④：打好的皮冻用蛋白质含量测量器检测，蛋白质含量在36%左右
+
+皮冻加工流程③
+图①
+图②
+图③
+图④
+图⑤
+
+图①：将冷藏保存在冰箱的完全凝固猪皮冻取出，用刀从保鲜盒壁插入使皮冻与保鲜盒分离，然后倒出
+图②：将皮冻切成3cm厚的条，皮冻凝固时杂质会沉淀，所以底部0.5~0.8cm底部杂质层切掉不要
+图③：皮冻凝固时部分杂质会上浮，另外表层接触空气会凝结很粘，所以表层0.5~0.8cm杂质层切掉不要
+图④：将皮冻改刀成40克大小，因改刀有差异，检查标准为36~44克
+图⑤：皮冻冷藏保存；红线：当批次加工皮冻用量不超过3天时间（例如周一加工的皮冻在周三下班前必须使用
+
+出品流程 ~ 中份标准
+图①
+图②
+图③
+图④
+图⑤
+
+图①中份藕汤罐内加入筒子骨1根（小的走中份），皮冻1块（40克）
+图②可将盖子放在2罐中间位置，早班根据预估量加工
+图③加入高汤1袋450克，煨汤煲盖上盖子，打开到大火位置煨制（全部打开后检查一下，不要开在低火或者自动位置）
+图④加入打好的藕泥250克（使用250克量化勺1勺）（没有开火的时禁止加藕泥，防止藕汤变质）
+图⑤火烧开后，待汤汁滚烫，原料出味，加入压制的藕块250克（约10~12块，藕块大小略微有区别）
+
+出品流程 ~ 中份标准
+图1
+图2
+图3
+图4
+图5
+
+图1 横汤煲制过程中，由于罐子温度大小略微不同，汤烧开后需要将每一罐汤盖逐一打开检查骨汤水位是否再罐口与罐身链接的转接位置。如果水位过低需要将压扁的原汤加至标准水位，糖汤原汤装在专用水壶中备用，每隔30分钟检查煲汤罐水位一次，是否在罐口平行上 如若减少及时补汤，每罐汤煲加汤最好不要超过3次，加汤太频繁的话应会发白
+图2 取1罐熬1.5小时以上的糖汤（挑选颜色鲜艳红润、汤汁丝滑、糖块粉糯的成品），用勺子将浮油撒到一边，将油打出（否则喝汤时会增加油腻感、太油）
+图3 黑胡椒减少脱加入调味粉10.7克/黑胡椒标准脱加入调味粉11克（实际操作中很难每份都称准确，允许±0.5克误差）（深圳标准：只用黑胡椒标准脱调味粉11克，白胡椒粉脱8.5克），倒入糖汤
+图4 用汤勺由底向上提起再将汤淋在胡椒粉，反复多次搅动直至调味粉完全融化融合
+
+出品流程 ~ 大份标准
+图①
+图②
+图③
+图④
+图⑤
+
+图① 大份精汤罐内加入筒子骨1根（大的走大份），皮冻3块（120克）
+图② 可将盖子放在2罐中间位置，早班根据预估量加工
+图③ 加入高汤2袋（900克），煲汤覆盖上盖子，打开到大火位置煲制（全部打开后检查一下，不要开在低火或者自动位置）
+图④ 加入打好的藕泥400克（使用400克量化勺1勺）（没有开火的时禁止加藕泥，防止藕汤变质）
+图⑤ 大火烧开待汤汁滚烫，原料出味，加入压制好的藕块500克（约24~25块，藕块大小略微有区别）
+
+出品流程 ~ 大份标准
+图1
+图2
+图3
+图4
+图5
+
+图1 横汤煲制过程中，由于罐子温度大小略微不同，汤烧开后需要将每一罐汤盖逐一打开检查骨汤水位是否再罐口与罐身链接的转接位置。如果水位过低需要将压满的原汤加至标准水位，糖汤原汤装在专用水壶中备用，每隔30分钟检查煲汤罐水位一次，是否在罐口平行上 如若减少及时补汤，每罐汤煲加汤最好不要超过3次，加汤太频繁的话应色会发白
+图2 取1罐熬1.5小时以上的糖汤（挑选颜色鲜艳红润、汤汁丝滑、糖块粉糯的成品），用勺子将浮油撒到一边，将油打出（否则喝汤时会增加油腻感，太油）
+图3 黑胡椒减少脱加入调味粉21.4克/黑胡椒标准脱加入调味粉22克（实际操作中很难每份都称准确，允许±0.5克误差）（深圳标准：只用黑胡椒标准脱调味粉22克，白胡椒粉脱17克），倒入糖汤
+图4 用汤勺由底向上提起再将汤淋在胡椒粉，反复多次搅动直至调味粉完全融化融合
+
+
+4 藕汤尝味标准
+尝味人：	店长，厨师长，副厨师长
+品尝规则：	尝味同时2人在场一起品尝，尝完后签字确认，质检摄像头抽查
+品尝要求：	每人拿一干净米饭碗和汤勺；取1个干净藕汤汤勺，随机盛1勺藕汤1藕块倒入碗中，2人盛好相继品尝沟通；每次品尝3罐汤即可
+品尝检查时间：	上午10：30（外卖售卖、检查第一批汤）
+下午12：00（堂食售卖高峰，检查第一批和第二批汤）
+下午16：30（下午堂食）（17：30-18:00再尝但不用记录和反馈）
+看
+颜色粉红
+
+撸
+藕粉糯
+
+闻
+藕香肉香
+
+搅
+汤浓，汤翻滚较慢，用勺搅动挂勺
+
+测
+盐度值0.71-0.76 / 盐度值0.81-0.90
+
+尝
+现场品尝，入口新鲜味美，淳厚丝滑，胡椒味突出，每次品尝3分钟
+
+===== Page 23 =====
+
+5 常见问题
+一、藕汤咸容易出现的问题点
+早上腌制藕块时容器太小，腌制时盐未能完全融化，清洗时水加的太少，未能把盐份充分的清洗下来，捞藕块时控水不干净，导致压制的藕块咸，压好藕块的原汤味道咸，汤不够时加完原汤后烧制，最后出品调味时口味会咸。
+
+烧制时间太长，汤不够时加完原汤后烧制，加汤的次数过多，最后出品调味时口味会咸。
+
+整改措施：
+腌制藕块的容器小的话分量腌制，不要一次性腌制一高压锅藕块，盐不容易融化。
+
+清洗时水加多点，如果容器小的话清洗后换水再清洗一遍或者流水冲洗。
+
+整改措施：
+早上备货的时候分时间段开火7点-12点，8点-13点，9点-14点，根据门店的生意备货合理的数量，时间最好控制在5个小时左右，不要早上的汤到下午还在销售。
+
+如果压制好藕块的原汤咸的话可以加适量的高汤进去融合后在使用。
+
+二、藕汤浓稠容易出现的问题
+制作藕泥时未按照标准量化。
+
+早上制作藕泥时把一天的藕泥都打出来了，放到最后藕泥冷了会变粘稠，按照250克量勺去量化的重量就超过了250克。
+
+整改措施：
+藕汤操作员在制作过程中严格按标准量化（藕块与原汤的比例0.8：1比例，400克藕块500克原汤执行）。
+
+藕泥打的时候分批量分餐的加工，如果早上打好没有用完的藕泥要加汤进去融合，让藕泥的粘稠度降低后再使用。
+
+## 结果 3
+**标题**: 利川蒜香凤爪SOP20250718
+**评分**: 10.617
+**路径**: /app/documents/利川蒜香凤爪SOP20250718.md
+**内容片段**: # 利川蒜香凤爪SOP20250718
+
+<!-- image -->
+
+## 利川蒜香凤爪SOP产品标准
+
+## 味型：蒜香微辣
+
+限单次出品3份/锅
+
+<!-- image -->
+
+- 1 ，验收标准
+- 2 ，加工标准
+- 3 ，切配标准
+- 4 ，操作标准
+- 5 ，产品SOC
+- 6 ，菜品解析图
+
+<!-- image -->
+
+## 验收标准
+
+<!-- image -->
+
+凤爪 ：大小均匀、品相 饱满有光泽、无淤血、 无变质
+
+不符合标准：大小不均 匀，品相不饱满无光泽， 有淤血、变质
+
+<!-- image -->
+
+腐竹 ：无受潮发霉，色 泽金黄
+
+不符合标准：受潮发霉
+
+<!-- image -->
+
+鲜红小米辣（净） ：长47cm ，形状大小均匀，新鲜饱 满颜色不是特别鲜艳统一（特 别红且颜色纯，说明人工增 红），用手捏一捏，较硬说明 果肉饱满且新鲜，如果很软, 可能是囤货,很容易坏
+
+不符合标准：未去把柄，发软， 出水，变质
+
+<!-- image -->
+
+<!-- image -->
+
+生姜 ：外观鲜亮、外皮光 滑、色泽鲜艳；形状挺拔， 粗壮坚固；气味浓郁、清 新
+
+去皮大蒜瓣 ：颜色洁白无 杂质，根部硬块处理干净， 用手捏大蒜是比较硬的， 说明蒜瓣水分充足，长得 也比较饱满
+
+不符合标准：根部处理不 干净，有烂块，有捂过的 水臭味
+
+不符合标准：腥臭或发霉， 表面粗糙、枯黄或者出现 大量黑色斑点
+
+<!-- image -->
+
+八角 ：色泽呈红棕色或红褐色，有光泽， 香气浓郁，具有特有的茴香味，质地干 燥
+
+不符合标准：色泽过暗或过于鲜艳，有 刺鼻的味道，霉味，或其他异味，质地 发软，有潮湿，含水量高容易发霉。
+
+<!-- image -->
+
+桂皮 ：外表呈灰棕色,稍粗糙,有不规则细 皱纹和突起物,内表红棕色、平滑,有细纹 路,划之显油痕,断面外层棕色,内层红棕 色而油润,近外层有一条淡黄棕色环纹,气 香浓烈,味甜、辣。品质以身干、皮薄、有 香气,味微辛甜者为佳
+
+不符合标准：色泽不佳，形状不整，香味不 足，过于潮湿，含有异物等情况。
+
+<!-- image -->
+
+湖南皱皮辣椒碎 ：自然鲜艳的颜色， 辣椒碎大小相对均匀，具有浓郁纯正 的皱皮辣椒香味，触感比较干燥。
+
+不符合标准：色泽无灰暗，发白等异 常颜色，霉味，哈喇子味，刺鼻的异 味，有沙子等杂质或发霉现象。
+
+<!-- image -->
+
+<!-- image -->
+
+## 腐竹皮加工标准
+
+1. 油温烧制180℃-190℃ ，准备好腐竹皮4-5片，下入锅中关火炸制，不停的搅拌炸制均匀、
+2. 炸透的腐竹皮，色泽金黄，外表炸起泡、捞出 控 油
+3. 准备好容 器 ， 将 炸好的腐竹皮 在 温水 里浸 泡、泡发
+4. 泡发好的腐竹 斜刀 切1cm 宽 的条
+5. 净锅下入1000 克 高 汤 ， 调 入 盐 4 勺 （ 约 12 克 ）， 鸡精 2 勺 （ 约 4 克 ），烧 开后 下入泡发好的腐竹皮600 克 开 大火烧 开 ，中小火 煲 制大 约 4-5 分 钟 、 煨 制 口 感 柔 和入味、
+6. 煲 好的腐竹皮， 倒 出 放 入容 器 中，出品 保持 腐竹皮的温 度 ，不能是 凉 的、
+
+## 加工参考步骤图
+
+<!-- image -->
+
+## 加工投料比例 ：
+
+1 袋鸡爪 （4 斤 ）
+
+生姜 75 克
+
+干辣椒 王
+
+：15 克
+
+八角
+
+：5
+
+克      桂 皮：3
+
+克
+
+花 椒：7
+
+克 （ 青 红 花 椒 各 一 半 ）
+
+老谭酱 油10 克
+
+北京二 锅 头 30 克
+
+1 个 黄 枝 子（ 拍开 加100 克开 水泡5分 钟 ）
+
+<!-- image -->
+
+## 1. 3. 4. 勺 7. 蒜 香 凤 爪 加 工 标 准 燃 气 灶
+
+- 翦 好 指甲 的 鸡爪 4 斤 ， 冲 净血水 约 30 分 钟 ， 凉 水下锅 没 过 凤爪 2cm ，
+2. 下入白 酒 30 克 ， 开 中小火， 撇 去血 沫 ， 打掉少许开 水加入等量的清水， 继续焯 水，
+- 焯 水 到凤爪 色泽发白，无大量血 沫即 可、捞出 冲 水10分 钟
+
+热 锅下菜 籽 油75 克 、下入 姜 片75 克煸 出香味，下入 青 红 花 椒7 克 、 八角 5 克 、 桂 皮3 克 ， 煸至花 椒发白，
+
+5. 下入 8 勺 清水 约 1800 克 ，下入 冲洗 干净的 鸡爪 ， 调 入 盐 5 勺 （15 克) 、味 精 2 （6 克) ，1 颗 黄 栀 子水（黄 栀 子 废弃 不 要 ）， 老坛酱 油10 克 烧 开
+
+6. 用 炒勺将边上 的油 沫 子 往 中 间打 ，油 沫与汤汁融 合 后 、
+
+即 可 倒 入高 压 锅中、 盖上 锅 盖
+
+8. 上 气10分 钟焖 20 分 钟 ， 凤爪压 制软 糯 ，无大量 破 皮 即 可、（根 据门店 高 压 锅 密 度 大小 进行调 整）
+
+<!-- image -->
+
+## 电灶加工投料比例 ：
+
+1 袋鸡爪 （4 斤 ）
+
+生姜 75 克
+
+干辣椒 王
+
+：15
+
+克
+
+八角
+
+：5 克      桂 皮：3 克
+
+花 椒：7
+
+克 （ 青 红 花 椒 各 一 半 ）
+
+老谭酱 油10 克
+
+北京二 锅 头 30 克
+
+1 个 黄 枝 子
+
+拍开 加100 克开 水泡5分 钟
+
+1. 翦 好 指甲 的 鸡爪 4 斤 ， 冲 净血水 约 30 分 钟 ， 凉 水下锅 没 过 凤爪 2cm ， 2. 下入白 酒 30 克 ， 开二三档 切 换撇 去血 沫 , 打掉少许开 水加入等量的清水, 继续焯 水， 蒜 香
+
+<!-- image -->
+
+电
+
+灶
+
+凤
+
+爪
+
+加
+
+3. 焯 水 到凤爪 色泽发白，无大量血 沫即 可、捞出 冲 水10分 钟 4. 克
+
+热 锅下菜 籽 油75 克 、下入 姜 片75 克开二档 ， 煸 出香味， 转 一 档 下入 青 红 花 椒7 、
+
+八角 5 克 、 桂 皮3 克 ， 煸至花 椒发白，
+
+5. 下入 8 勺 清水 约 1800 克 ， 开五档 烧 开 下入 冲洗 干净的 鸡爪 ， 调 入 盐 5 勺 （15 克) 、 工 标
+
+味 精 2 勺 （6 克) ，1 颗 黄 栀 子水（黄 栀 子 废弃 不 要 ） 老坛酱 油10 克 烧 开 6. 转三档 用 炒勺将边上 的油 沫 子 往 中 间打 ，油 沫与汤汁融 合 后 、 准
+
+7
+
+## 切配标准
+
+主料
+
+## ： 鸡爪 8 个
+
+辅料
+
+：腐竹皮 50 克 ，蒜 米 150 克 ，小 米 辣4 克 ，皱皮辣椒6 克
+
+调料
+
+：
+
+海天蚝 油15 克 、一品鲜10 克 、 老谭酱 油0.5 克 、 家乐鸡精 3 克 、 玖 味白 胡 椒 粉 1 克 、 风车生粉 2 克 、
+
+<!-- image -->
+
+加工好的 鸡爪 8 个/份
+
+<!-- image -->
+
+去皮大蒜瓣碎150 克
+
+鲜红小 米 辣 段 4 克 皱皮辣椒6 克
+
+<!-- image -->
+
+煨 好的腐竹皮 50 克
+
+<!-- image -->
+
+凤 爪 出 品 参 考 步 骤 图
+
+## 蒜 香 凤 爪 出 燃 气 灶
+
+标
+
+品
+
+准
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+- 1 . 热 锅下菜 籽 油15 克 、 猪 油15 克 , 烧 热
+- 2 . 下入 150 克 粗蒜小火 炒 香,下入6 克 辣椒片,4 克 小 米 椒小火 炒 出香味
+- 3 . 烹 入200 克 高 汤 , 下入 鸡爪 8 个 ， 汤汁 烧 开后
+- 4 . 转 中小火， 调 入15 克蚝 油,10 克 一品鲜, 鸡精 3 克 , 进行调 味
+- 5 . 汤汁 收浓 稠后 ，小火，下入白 胡 椒 粉 1 克 ,
+- 6 . 下入 老谭酱 油0.5 克 ， 进行调 色，收浓 汁
+- 7 . 下入 10 克生粉 水（ 生粉 2 ，水 8 ），关小火 晃 匀，中火 煮熟使 其均匀的 包裹在鸡爪上 ，
+- 8 . 淋上 5 克 明油， 既 可以起锅 装盘 、
+
+9
+
+- . 挤 干水 份 的腐竹皮 垫底 ， 鸡爪打在控 干水 份 的腐竹 上
+
+10
+
+- . 装盘撒葱花即 可 装盘撒葱花即 可
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+10
+
+<!-- image -->
+
+<!-- image -->
+
+成 菜 后 蒜香味突出 芡汁 均匀明亮 油 包芡汁
+
+<!-- image -->
+
+电
+
+## 操作标准
+
+<!-- image -->
+
+蒜
+
+香
+
+凤
+
+- 1 . 热 锅下菜 籽 油15 克 、 猪 油15 克 , 开二档 烧 热
+- 2 . 零档 下入150 克 粗蒜一 档炒 香 约 15 秒 , 下入 6 克 辣椒片,4 克 小 米 椒一 档炒 出香味
+- 3 . 烹 入200 克 高 汤 , 下入 鸡爪 8 个 ， 汤汁 烧 开后 ， 开二档 烧制
+- 4 . 调 入15 克蚝 油,10 克 一品鲜, 鸡精 3 克 , 进行调 味
+- 5 . 二档 烧制 约 1 分 钟 ， 汤汁 收浓 稠后 ，下入白 胡 椒 粉 1 克 , 爪 灶
+- 6 . 下入 老谭酱 油0.5 克 ， 进行调 色， 二档 收浓 汁 出 灶
+- 7 . 下入 10 克生粉 水（ 生粉 2 ，水 8 ）， 二档摇晃 均匀， 煮熟 ， 使 其均匀的 包裹在鸡爪上 品
+
+标
+
+- 8 . 淋上 5 克 明油， 既 可以起锅 装盘 、
+
+准
+
+- 9 . 挤 干水 份 的腐竹皮50 克垫底 ， 鸡爪打在控 干水 份 的腐竹 上
+- 10 . 装盘撒葱花即 可 装盘撒葱花即 可
+
+## 热 菜产品SOC操作 卡
+
+| 利 川 蒜 香 凤   |              | 一、炸腐竹皮油温不能 太 高 但要 炸透                                                                       |
+|-------------|--------------|--------------------------------------------------------------------------------------------|
+| 利 川 蒜 香 凤   | 操 作 要 点      | 二 、 凤爪 出品 底 油 炒 蒜不 宜太多 ， 否 则收不 住汁 三 、加工好的 凤爪 ，出品之 前最 好 蒸热 出品 四 、 压 制好的 凤爪必须 软 糯 不 散 ，无 破 皮 |
+| 利 川 蒜 香 凤   | 出品色泽         | 酱 黄色                                                                                       |
+| 利 川 蒜 香 凤   | 最 佳制作 数 量    | 1-3 份                                                                                      |
+| 爪           | 最 佳 风 味 期与储存 | 加工好的 凤爪 48小 时 内 使 用 完 ， 冷藏储存                                                               |
+| 利 川 蒜 香 凤   | 产品红 线问题      | 煮 过 调 好味的腐竹皮 隔夜                                                                            |
+|             | 产品 反 面 案例    | 1.出品 凤爪 不软 糯 。 2.腐竹皮炸制发黑。 3.出品 芡汁 不均匀明亮。 4.出品 凤爪 腥。                                        |
+|             | 菜品 名称 ：      | 利川 蒜香 凤爪                                                                                   |
+|             | 主料 标准：       | 凤爪 8 个 ，蒜 籽 150 克                                                                          |
+| 需           | 辅料 标准：       | 菜 籽 油15 克 ， 猪 油15 克 ，腐竹50 克 ，小 米 椒4 克 ，辣椒片6 克                                              |
+| 知           | 预 加工 时效 ：    | 20 斤 30分 钟                                                                                 |
+| 产           | 出品 时效 ：      |                                                                                            |
+| 品           | 餐 具 / 规 格 ：  | 19cm小 号 小 炒碗 （ 带L O G O）                                                                   |
+| 信           | 辅助餐 具：       |                                                                                            |
+| 息           | 口 味 口 感 描叙 ： | 蒜香味浓郁， 口 感软 糯脱骨                                                                            |
+|             | 忌口 ：         | 可 做免 辣                                                                                     |
+|             | 当前价格 ：       | 武汉区 ：39 元 外 埠区 ：49 元                                                                       |
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+#  ( #LOGO)
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+2025-09-19 04:20:51,389 - src.graph.nodes - INFO - BM25搜索完成，结果长度: 13262
+2025-09-19 04:20:51,390 - src.graph.nodes - INFO - 加工后的搜索结果: 📚 找到 3 个相关文档：
+
+### 文档 1: 慢吊底汤：高温蒸汽3 面循环熬煮9 小时，
+**内容**: 慢吊底汤：高温蒸汽3 面循环熬煮9 小时， 操作步骤：骨头水比例1:7 ，130 度高温蒸汽，骨头化渣，拒绝骨头重复熬汤。 技术壁垒：130 度高温蒸汽3 面循环熬煮9 小时一次成汤，骨头化渣，拒绝骨头重复使用。 筒骨风味塑造黄金8 小时：新鲜筒子骨，低温2 度，海盐腌制8 小时，肉质紧实有弹性，风味更独 特。 黄金8 小时后，冲洗盐份 爆炒筒子骨：猛火爆炒筒子骨，激发肉香。 高压急速焖藕：骨头底汤炖藕，让藕粉糯，高压循环焖制，打开莲藕气孔，释 放铁元素，吸收油脂。 捶打藕泥：古法捶打藕泥 当日清晨煨汤：把底汤、藕、筒子骨、藕泥按比例放进恒温罐，慢煨3.5 小时。 加汤不加水：煨汤过程中汤汁蒸发，加入焖煮藕的底汤，让底汤和藕汤保持一定浓度，整个煨汤期间不加水，香 浓健康。
+
+### 文档 2: 简子骨
+**内容**: 铫子筒骨煨藕汤产品标准 味型：咸鲜藕香 目录 验收标准 切配标准 操作标准 注意事项 常见问题 来菜 1 验收标准 简子骨: 品名：冻猪后棒骨，冷冻产品，26根/10千克/件，-18℃冷冻保存12个月，验收注意保质期，动物检疫合格证，冷冻情况 棒骨大头480*550克，小头320*400克，瘦肉颜色红润，鲜亮，如瘦肉发白微黄则为僵尸肉 不符合标准：包装不完整，原料已解冻，不在保质期内，棒骨颜色发白瘦肉发干 腌制盐: 品名：粤盐腌制盐，包装完整，1千克/包；防潮、防热、避光环境下保质期5年 不符合标准：包装不完整 2 切配标准 藕块改刀标准 图① 图② 图③ 图④ 图①：藕节去皮真空包装无漏气 图②：检查标签，粉藕，3kg/包，真空冷藏15天，0-5摄氏度保存 图③：将藕节取出，切掉2头0.5cm以上，然后将藕对破成两半，取半边再对破切开（1开4），顶刀切2.5cm*3cm段，藕块大小约25~30克，冲洗干净沥干水冷藏保存 图④：切掉的碎末，藕节两头的片冷藏保存做藕泥使用 3 操作标准 调味粉加工流程 图①大盒 图②小盒 图③大盒 图④小盒 黑胡椒标准版 图① 大盒装11克 原料比例： ...
+
+### 文档 3: 利川蒜香凤爪SOP20250718
+**内容**: # 利川蒜香凤爪SOP20250718 <!-- image --> ## 利川蒜香凤爪SOP产品标准 ## 味型：蒜香微辣 限单次出品3份/锅 <!-- image --> - 1 ，验收标准 - 2 ，加工标准 - 3 ，切配标准 - 4 ，操作标准 - 5 ，产品SOC - 6 ，菜品解析图 <!-- image --> ## 验收标准 <!-- image --> 凤爪 ：大小均匀、品相 饱满有光泽、无淤血、 无变质 不符合标准：大小不均 匀，品相不饱满无光泽， 有淤血、变质 <!-- image --> 腐竹 ：无受潮发霉，色 泽金黄 不符合标准：受潮发霉 <!-- image --> 鲜红小米辣（净） ：长47cm ，形状大小均匀，新鲜饱 满颜色不是特别鲜艳统一（特 别红且颜色纯，说明人工增 红），用手捏一捏，较硬说明 果肉饱满且新鲜，如果很软, 可能是囤货,很容易坏 不符合标准：未去把柄，发软， 出水，变质 <!-- image --> <!-- image --> 生姜 ：外观鲜亮、外皮光 滑、色泽鲜艳；形状挺拔， 粗壮坚固；气味浓郁、清 新 去皮大蒜瓣 ：颜色洁白无 ...
+
+2025-09-19 04:20:51,390 - src.graph.nodes - INFO - 提示消息: 
+    回答要求：
+    1. 判断用户的问题是要做什么
+    2. 基于提供的文档，是否与用户的问题有关，如果有关需要利用文档进行回答，如果无关则直接回答用户问题
+    3. 为提供具体、可操作，系统性的建议和指导
+    4. 可以说明并提供行业这类问题的专业解答建议
+    5. 使用语言：zh-CN
+    6. 结构清晰，重点突出
+
+    用户问题：藕汤有点咸了怎么办？
+    相关内部文档信息：
+    📚 找到 3 个相关文档：
+
+### 文档 1: 慢吊底汤：高温蒸汽3 面循环熬煮9 小时，
+**内容**: 慢吊底汤：高温蒸汽3 面循环熬煮9 小时， 操作步骤：骨头水比例1:7 ，130 度高温蒸汽，骨头化渣，拒绝骨头重复熬汤。 技术壁垒：130 度高温蒸汽3 面循环熬煮9 小时一次成汤，骨头化渣，拒绝骨头重复使用。 筒骨风味塑造黄金8 小时：新鲜筒子骨，低温2 度，海盐腌制8 小时，肉质紧实有弹性，风味更独 特。 黄金8 小时后，冲洗盐份 爆炒筒子骨：猛火爆炒筒子骨，激发肉香。 高压急速焖藕：骨头底汤炖藕，让藕粉糯，高压循环焖制，打开莲藕气孔，释 放铁元素，吸收油脂。 捶打藕泥：古法捶打藕泥 当日清晨煨汤：把底汤、藕、筒子骨、藕泥按比例放进恒温罐，慢煨3.5 小时。 加汤不加水：煨汤过程中汤汁蒸发，加入焖煮藕的底汤，让底汤和藕汤保持一定浓度，整个煨汤期间不加水，香 浓健康。
+
+### 文档 2: 简子骨
+**内容**: 铫子筒骨煨藕汤产品标准 味型：咸鲜藕香 目录 验收标准 切配标准 操作标准 注意事项 常见问题 来菜 1 验收标准 简子骨: 品名：冻猪后棒骨，冷冻产品，26根/10千克/件，-18℃冷冻保存12个月，验收注意保质期，动物检疫合格证，冷冻情况 棒骨大头480*550克，小头320*400克，瘦肉颜色红润，鲜亮，如瘦肉发白微黄则为僵尸肉 不符合标准：包装不完整，原料已解冻，不在保质期内，棒骨颜色发白瘦肉发干 腌制盐: 品名：粤盐腌制盐，包装完整，1千克/包；防潮、防热、避光环境下保质期5年 不符合标准：包装不完整 2 切配标准 藕块改刀标准 图① 图② 图③ 图④ 图①：藕节去皮真空包装无漏气 图②：检查标签，粉藕，3kg/包，真空冷藏15天，0-5摄氏度保存 图③：将藕节取出，切掉2头0.5cm以上，然后将藕对破成两半，取半边再对破切开（1开4），顶刀切2.5cm*3cm段，藕块大小约25~30克，冲洗干净沥干水冷藏保存 图④：切掉的碎末，藕节两头的片冷藏保存做藕泥使用 3 操作标准 调味粉加工流程 图①大盒 图②小盒 图③大盒 图④小盒 黑胡椒标准版 图① 大盒装11克 原料比例： ...
+
+### 文档 3: 利川蒜香凤爪SOP20250718
+**内容**: # 利川蒜香凤爪SOP20250718 <!-- image --> ## 利川蒜香凤爪SOP产品标准 ## 味型：蒜香微辣 限单次出品3份/锅 <!-- image --> - 1 ，验收标准 - 2 ，加工标准 - 3 ，切配标准 - 4 ，操作标准 - 5 ，产品SOC - 6 ，菜品解析图 <!-- image --> ## 验收标准 <!-- image --> 凤爪 ：大小均匀、品相 饱满有光泽、无淤血、 无变质 不符合标准：大小不均 匀，品相不饱满无光泽， 有淤血、变质 <!-- image --> 腐竹 ：无受潮发霉，色 泽金黄 不符合标准：受潮发霉 <!-- image --> 鲜红小米辣（净） ：长47cm ，形状大小均匀，新鲜饱 满颜色不是特别鲜艳统一（特 别红且颜色纯，说明人工增 红），用手捏一捏，较硬说明 果肉饱满且新鲜，如果很软, 可能是囤货,很容易坏 不符合标准：未去把柄，发软， 出水，变质 <!-- image --> <!-- image --> 生姜 ：外观鲜亮、外皮光 滑、色泽鲜艳；形状挺拔， 粗壮坚固；气味浓郁、清 新 去皮大蒜瓣 ：颜色洁白无 ...
+
+
+    请基于以上内部文档信息，为用户提供专业的餐饮解答和指导。如果文档中有相关信息，请重点引用，且不要更改文档里的内容比如盐的用量或者食材的用量；如果找不到答案，就说明文件中没有相关信息，不要编造
+2025-09-19 04:20:51,390 - src.graph.nodes - INFO - 提示消息就绪，数量: 2
+2025-09-19 04:20:51,838 - src.graph.nodes - INFO - 开始流式生成专业解答，LLM: basic
+2025-09-19 04:20:52,153 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-09-19 04:21:15,813 - src.graph.nodes - INFO - simple_researcher 响应长度: 771
+2025-09-19 04:21:15,814 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+2025-09-19 04:21:15,814 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 根据
+2025-09-19 04:21:15,814 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 您
+2025-09-19 04:21:15,814 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 的问题
+2025-09-19 04:21:15,815 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: "
+2025-09-19 04:21:15,815 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 藕
+2025-09-19 04:21:15,815 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汤
+2025-09-19 04:21:15,815 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 有点
+2025-09-19 04:21:15,815 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 咸
+2025-09-19 04:21:15,815 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 了
+2025-09-19 04:21:15,815 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 怎么办
+2025-09-19 04:21:15,815 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: "，
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 我
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 为您
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 提供
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 专业的
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 餐饮
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 解决方案
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+
+
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ##
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 问题
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 判断
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 您
+2025-09-19 04:21:15,816 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 遇到
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 的是
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 菜品
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调味
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 过
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 咸
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 的问题
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 这
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 属于
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 后
+2025-09-19 04:21:15,817 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 厨
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 常见
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 的技术
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调整
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 类
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 问题
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 。
+
+
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ##
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 文档
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 相关性
+2025-09-19 04:21:15,818 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 分析
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 经过
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 查阅
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 提供的
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 内部
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 文档
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 我发现
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+
+2025-09-19 04:21:15,819 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: -
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 文档
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 1
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 详细
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 描述了
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 藕
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汤
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 的制作
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 工艺
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 和
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 标准
+2025-09-19 04:21:15,820 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 流程
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: -
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 文档
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 2
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 包含了
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 筒
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 骨
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 煨
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 藕
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汤
+2025-09-19 04:21:15,821 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 的产品
+2025-09-19 04:21:15,822 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 标准和
+2025-09-19 04:21:15,822 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 操作
+2025-09-19 04:21:15,822 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 规范
+2025-09-19 04:21:15,822 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,822 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: -
+2025-09-19 04:21:15,822 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,822 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 文档
+2025-09-19 04:21:15,822 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 3
+2025-09-19 04:21:15,822 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 为
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 其他
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 菜品
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 标准
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 与
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 藕
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汤
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 咸
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 度
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调整
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 无关
+2025-09-19 04:21:15,823 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 重要
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 发现
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 文档
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 中
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 未
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 提供
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 针对
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 成品
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 藕
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汤
+2025-09-19 04:21:15,824 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 过
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 咸
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 的具体
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 补救
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 措施
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 但
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 提供了
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 制作
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 过程中的
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 关键
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 控制
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 点
+2025-09-19 04:21:15,825 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 。
+
+
+2025-09-19 04:21:15,826 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ##
+2025-09-19 04:21:15,826 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,826 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 专业
+2025-09-19 04:21:15,826 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 解决方案
+2025-09-19 04:21:15,826 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+
+2025-09-19 04:21:15,826 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ###
+2025-09-19 04:21:15,826 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,826 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 立即
+2025-09-19 04:21:15,826 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 补救
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 措施
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: （
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 针对
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 已
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 出品
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汤
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 品
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ）
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 1
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: .
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,827 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 稀释
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 法
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 加入
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 适量
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 未
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 味的
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 底
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汤
+2025-09-19 04:21:15,828 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 或
+2025-09-19 04:21:15,829 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 热水
+2025-09-19 04:21:15,829 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,829 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 分
+2025-09-19 04:21:15,829 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 次
+2025-09-19 04:21:15,829 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 少量
+2025-09-19 04:21:15,829 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 添加
+2025-09-19 04:21:15,829 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,829 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 边
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 加
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 边
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 尝
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 2
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: .
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 增
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 甜
+2025-09-19 04:21:15,830 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 平衡
+2025-09-19 04:21:15,831 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,831 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,831 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 可
+2025-09-19 04:21:15,831 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 加入
+2025-09-19 04:21:15,831 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 少量
+2025-09-19 04:21:15,831 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 白糖
+2025-09-19 04:21:15,831 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 或
+2025-09-19 04:21:15,831 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 冰糖
+2025-09-19 04:21:15,831 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,832 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 甜
+2025-09-19 04:21:15,832 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 味
+2025-09-19 04:21:15,832 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 能
+2025-09-19 04:21:15,832 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 有效
+2025-09-19 04:21:15,832 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 中和
+2025-09-19 04:21:15,832 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 咸
+2025-09-19 04:21:15,832 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 味
+2025-09-19 04:21:15,832 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,832 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 3
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: .
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 添加
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 配料
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 加入
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 新的
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 藕
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 块
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 或
+2025-09-19 04:21:15,833 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 土豆
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 块
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 同
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 煮
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 吸收
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 多余
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 盐
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 分
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 4
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: .
+2025-09-19 04:21:15,834 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 酸性
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调和
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 滴
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 入
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 几
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 滴
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 白
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 醋
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 或
+2025-09-19 04:21:15,835 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 柠檬
+2025-09-19 04:21:15,836 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汁
+2025-09-19 04:21:15,836 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,836 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 酸性
+2025-09-19 04:21:15,836 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 物质
+2025-09-19 04:21:15,836 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 能
+2025-09-19 04:21:15,836 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 降低
+2025-09-19 04:21:15,836 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 咸
+2025-09-19 04:21:15,836 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 味
+2025-09-19 04:21:15,836 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 感知
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ###
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 预防
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 措施
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: （
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 基于
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 文档
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 标准
+2025-09-19 04:21:15,837 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ）
+2025-09-19 04:21:15,838 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+
+2025-09-19 04:21:15,838 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 根据
+2025-09-19 04:21:15,838 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 文档
+2025-09-19 04:21:15,838 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 1
+2025-09-19 04:21:15,838 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 和
+2025-09-19 04:21:15,838 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 2
+2025-09-19 04:21:15,838 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 的标准
+2025-09-19 04:21:15,838 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 流程
+2025-09-19 04:21:15,838 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,839 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 建议
+2025-09-19 04:21:15,839 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,839 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,839 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: -
+2025-09-19 04:21:15,839 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,839 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 严格
+2025-09-19 04:21:15,839 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 遵循
+2025-09-19 04:21:15,839 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 腌制
+2025-09-19 04:21:15,839 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 标准
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 筒
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 骨
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 海
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 盐
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 腌制
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 8
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 小时后
+2025-09-19 04:21:15,840 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 必须
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 彻底
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 冲洗
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 盐
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 分
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: -
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 精确
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 计量
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,841 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 确保
+2025-09-19 04:21:15,842 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调味
+2025-09-19 04:21:15,842 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 料
+2025-09-19 04:21:15,842 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 添加
+2025-09-19 04:21:15,842 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 的
+2025-09-19 04:21:15,842 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 准确性
+2025-09-19 04:21:15,842 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,842 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 使用
+2025-09-19 04:21:15,842 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 标准
+2025-09-19 04:21:15,842 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 量
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 具
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: -
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 分
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 阶段
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调味
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 煨
+2025-09-19 04:21:15,843 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汤
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 过程中
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 分
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 次
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调味
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 避免
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 一次性
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 加入
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 过多
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 盐
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 分
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+
+2025-09-19 04:21:15,844 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ###
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 行业
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 专业
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 建议
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 1
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: .
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 建立
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 标准化
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调味
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 流程
+2025-09-19 04:21:15,845 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 制定
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 明确的
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 盐
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 度
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 测量
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 标准
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: （
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 如
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 使用
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 盐
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 度
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 计
+2025-09-19 04:21:15,846 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ）
+
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 2
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: .
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 实施
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 尝
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 味
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 制度
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 出品
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 前
+2025-09-19 04:21:15,847 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 必须
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 由
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 专人
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 尝
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 味
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 确认
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 3
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: .
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 记录
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调味
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 数据
+2025-09-19 04:21:15,848 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,849 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,849 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 建立
+2025-09-19 04:21:15,849 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调味
+2025-09-19 04:21:15,849 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 记录
+2025-09-19 04:21:15,849 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 表
+2025-09-19 04:21:15,849 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,849 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 便于
+2025-09-19 04:21:15,849 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 追溯
+2025-09-19 04:21:15,849 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 和
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调整
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 4
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: .
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  **
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 员工
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 培训
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: **
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ：
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 加强
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 后
+2025-09-19 04:21:15,850 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 厨
+2025-09-19 04:21:15,851 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 人员
+2025-09-19 04:21:15,851 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 对
+2025-09-19 04:21:15,851 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调味
+2025-09-19 04:21:15,851 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 准确
+2025-09-19 04:21:15,851 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 性的
+2025-09-19 04:21:15,851 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 重视
+2025-09-19 04:21:15,851 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 和
+2025-09-19 04:21:15,851 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 技能
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 培训
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ##
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 注意事项
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: -
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 补救
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 措施
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 应在
+2025-09-19 04:21:15,852 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 客人
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 食用
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 前
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 完成
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: -
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调整
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 后的
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 汤
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 品
+2025-09-19 04:21:15,853 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 必须
+2025-09-19 04:21:15,854 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 重新
+2025-09-19 04:21:15,854 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 加热
+2025-09-19 04:21:15,854 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 至
+2025-09-19 04:21:15,854 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 沸腾
+2025-09-19 04:21:15,854 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+2025-09-19 04:21:15,854 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: -
+2025-09-19 04:21:15,854 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content:  
+2025-09-19 04:21:15,854 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 如
+2025-09-19 04:21:15,854 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 咸
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 度过
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 高
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 无法
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 有效
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调整
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 建议
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 重新
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 制作
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+
+
+2025-09-19 04:21:15,855 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 如果您
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 需要
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 更
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 详细的
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 调味
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 标准
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 制定
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 或
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 员工
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 培训
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 方案
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: ，
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 我可以
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 为您
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 提供
+2025-09-19 04:21:15,856 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 进一步的
+2025-09-19 04:21:15,857 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 专业
+2025-09-19 04:21:15,857 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 指导
+2025-09-19 04:21:15,857 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 。
+2025-09-19 04:21:15,857 - src.server.app - INFO - 🚀 Sending event to frontend - Type: message_chunk, Thread: 0aQ1IXrM0oE8QmheW1Msk, Agent: simple_researcher, MessageID: run--6154e0cb-5088-4396-b819-96686ab73051, Content: 
+INFO:     127.0.0.1:34416 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51504 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35662 - "GET /api/config HTTP/1.1" 200 OK

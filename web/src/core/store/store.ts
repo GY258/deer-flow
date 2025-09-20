@@ -46,10 +46,21 @@ export const useStore = create<{
   openResearchId: null,
 
   appendMessage(message: Message) {
-    set((state) => ({
-      messageIds: [...state.messageIds, message.id],
-      messages: new Map(state.messages).set(message.id, message),
-    }));
+    set((state) => {
+      // 检查是否已存在相同内容的消息
+      const existingMessage = Array.from(state.messages.values())
+        .find(m => m.content === message.content && m.agent === message.agent);
+      
+      if (existingMessage) {
+        console.log('🚫 Duplicate message content detected, skipping:', message.id);
+        return state;
+      }
+      
+      return {
+        messageIds: [...state.messageIds, message.id],
+        messages: new Map(state.messages).set(message.id, message),
+      };
+    });
   },
   updateMessage(message: Message) {
     set((state) => ({
@@ -207,14 +218,19 @@ async function processStream(stream: AsyncIterable<{ type: string; data: any }>,
           currentContent: message.content,
           isStreaming: message.isStreaming
         });
-        try {
-          message = mergeMessage(message, event as any);
-        } catch (e) {
-          console.error('[processStream] mergeMessage error', e, { type, id: message.id });
-          // Prevent stuck streaming state on merge failure
-          message.isStreaming = false;
+        
+        // 检查是否已经完成且内容不为空
+        if (message.finishReason === "stop" && message.content && message.content.length > 0) {
+          console.log('🚫 Message already completed with content, skipping merge:', message.id);
+        } else {
+          try {
+            message = mergeMessage(message, event as any);
+          } catch (e) {
+            console.error('[processStream] mergeMessage error', e, { type, id: message.id });
+            message.isStreaming = false;
+          }
+          updateMessage(message);
         }
-        updateMessage(message);
         
         console.log('🔄 After merge:', {
           messageId: message.id,
@@ -283,8 +299,7 @@ function appendMessage(message: Message) {
   if (
     message.agent === "coder" ||
     message.agent === "reporter" ||
-    message.agent === "researcher" ||
-    message.agent === "simple_researcher" 
+    message.agent === "researcher"
   ) {
     console.log('🔬 Processing research-related message:', message.agent);
     if (!getOngoingResearchId()) {
@@ -299,6 +314,7 @@ function appendMessage(message: Message) {
   }
   
   console.log('💾 Adding message to store');
+  // 直接调用 store 的 appendMessage，它会处理去重
   useStore.getState().appendMessage(message);
   console.log('✅ Message added to store successfully');
 }
@@ -313,7 +329,7 @@ function updateMessage(message: Message) {
 
   if (
     getOngoingResearchId() &&
-    message.agent === "reporter" &&
+    message.agent === "reporter"  &&
     !message.isStreaming
   ) {
     console.log('🏁 Research completed, clearing ongoing research');
@@ -331,6 +347,15 @@ function getOngoingResearchId() {
 
 function appendResearch(researchId: string) {
   console.log('🔬 appendResearch called for:', researchId);
+  
+  // 获取当前消息
+  const currentMessage = getMessage(researchId);
+  
+  // 如果是 simple_researcher，不添加到 researchIds
+  if (currentMessage?.agent === "simple_researcher") {
+    console.log('🚫 Skipping researchIds for simple_researcher');
+    return;
+  }
   
   let planMessage: Message | undefined;
   const reversedMessageIds = [...useStore.getState().messageIds].reverse();

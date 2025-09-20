@@ -97,7 +97,9 @@ def bm25_search_tool(
         formatted_results = []
         results = result.get('results', [])
         search_time = result.get('search_time_seconds', end_time - start_time)
-        
+        if len(results) > limit:
+            results = results[:limit]
+            logger.warning(f"BM25服务器返回了{len(result.get('results', []))}个结果，但请求的limit是{limit}，已截取前{limit}个结果")
         if not results:
             return f"未找到与 '{query}' 相关的结果"
         
@@ -109,10 +111,12 @@ def bm25_search_tool(
             title = doc.get('title', 'N/A')
             score = doc.get('score', 0)
             snippet = doc.get('snippet', '')
+            path = doc.get('path', '')
             
             formatted_results.append(f"## 结果 {i}")
             formatted_results.append(f"**标题**: {title}")
             formatted_results.append(f"**评分**: {score:.3f}")
+            formatted_results.append(f"**路径**: {path}")
             
             if snippet:
                 formatted_results.append(f"**内容片段**: {snippet}")

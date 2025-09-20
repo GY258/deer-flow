@@ -23,6 +23,7 @@ import {
   setEnableBackgroundInvestigation,
   setEnableSimpleResearch,
   useSettingsStore,
+  openResearch,  // 添加这一行
 } from "~/core/store";
 import { cn } from "~/lib/utils";
 
@@ -43,6 +44,7 @@ export function InputBox({
     options?: {
       interruptFeedback?: string;
       resources?: Array<Resource>;
+      enableSimpleResearch?: boolean;
     },
   ) => void;
   onCancel?: () => void;
@@ -82,6 +84,7 @@ export function InputBox({
           onSend(message, {
             interruptFeedback: feedback?.option.value,
             resources,
+            enableSimpleResearch,
           });
           onRemoveFeedback?.();
           // Clear enhancement animation after sending
@@ -269,7 +272,19 @@ export function InputBox({
                 enableSimpleResearch && "!border-brand !text-brand",
               )}
               variant="outline"
-              onClick={() => setEnableSimpleResearch(!enableSimpleResearch)}
+              onClick={() => {
+                const newValue = !enableSimpleResearch;
+                setEnableSimpleResearch(newValue);
+                
+                // 简单研究模式不打开研究面板
+                if (newValue) {
+                  // 不调用 openResearch("simple-research-mode")
+                  // openResearch("simple-research-mode");
+                } else {
+                  // 关闭简单研究模式时关闭研究面板
+                  // closeResearch();
+                }
+              }}
             >
               🍽️ {t("simpleResearch")}
             </Button>

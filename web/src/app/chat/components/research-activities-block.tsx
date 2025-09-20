@@ -38,10 +38,29 @@ export function ResearchActivitiesBlock({
   className?: string;
   researchId: string;
 }) {
+  // 所有 hooks 必须在条件语句之前调用
   const activityIds = useStore((state) =>
     state.researchActivityIds.get(researchId),
-  )!;
+  );
   const ongoing = useStore((state) => state.ongoingResearchId === researchId);
+  
+  // 处理简单模式的情况
+  if (researchId === "simple-research-mode") {
+    return (
+      <div className={cn("flex flex-col py-4", className)}>
+        <div className="px-4 py-8 text-center text-muted-foreground">
+          <div className="mb-4 text-4xl">🍽️</div>
+          <div className="text-xl font-medium mb-2">餐饮智能助手已启用</div>
+          <div className="text-sm">请发送您的问题，我将为您提供专业的餐饮解答</div>
+        </div>
+      </div>
+    );
+  }
+
+  // 对于正常的研究ID，需要确保activityIds存在
+  if (!activityIds) {
+    return null;
+  }
   return (
     <>
       <ul className={cn("flex flex-col py-4", className)}>
@@ -73,7 +92,7 @@ export function ResearchActivitiesBlock({
 function ActivityMessage({ messageId }: { messageId: string }) {
   const message = useMessage(messageId);
   if (message?.agent && message.content) {
-    if (message.agent !== "reporter" && message.agent !== "planner") {
+    if (message.agent !== "reporter" && message.agent !== "planner" && message.agent !== "simple_researcher") {
       return (
         <div className="px-4 py-2">
           <Markdown animated checkLinkCredibility>
