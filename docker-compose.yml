@@ -47,7 +47,7 @@ services:
       # 前端访问后端的地址 - 通过nginx代理
       - NEXT_PUBLIC_API_URL=http://app.lerna-ai.com/api
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "sh", "-c", "wget --no-verbose --tries=1 --spider http://$$(hostname -i):3000"]
       interval: 30s
       timeout: 10s
       retries: 3
