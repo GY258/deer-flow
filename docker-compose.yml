@@ -12,6 +12,7 @@ services:
       - .env
     volumes:
       - ./conf.yaml:/app/conf.yaml:ro
+      - ./logs:/app/logs  # 映射日志目录到宿主机
     restart: unless-stopped
     networks:
       - deer-flow-network

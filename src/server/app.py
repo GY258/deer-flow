@@ -47,6 +47,7 @@ from src.server.rag_request import (
 from src.tools import VolcengineTTS
 from src.graph.checkpoint import chat_stream_message
 from src.utils.json_utils import sanitize_args
+from src.utils.request_logger import get_request_logger
 
 logger = logging.getLogger(__name__)
 
@@ -95,9 +96,32 @@ async def chat_stream(request: ChatRequest):
 
     selected_graph = simple_graph if request.enable_simple_research else graph
     
+    # 记录请求日志
+    request_logger = get_request_logger()
+    messages = request.model_dump()["messages"]
+    user_query = messages[-1]["content"] if messages else ""
+    
+    request_metadata = {
+        "max_plan_iterations": request.max_plan_iterations,
+        "max_step_num": request.max_step_num,
+        "max_search_results": request.max_search_results,
+        "enable_simple_research": request.enable_simple_research,
+        "enable_background_investigation": request.enable_background_investigation,
+        "report_style": request.report_style.value if request.report_style else None,
+        "enable_deep_thinking": request.enable_deep_thinking,
+        "auto_accepted_plan": request.auto_accepted_plan,
+    }
+    
+    request_id = request_logger.log_request(
+        thread_id=thread_id,
+        user_query=user_query,
+        messages=messages,
+        request_metadata=request_metadata,
+    )
+    
     return StreamingResponse(
         _astream_workflow_generator(
-            request.model_dump()["messages"],
+            messages,
             thread_id,
             request.resources,
             request.max_plan_iterations,
@@ -109,7 +133,8 @@ async def chat_stream(request: ChatRequest):
             request.enable_background_investigation,
             request.report_style,
             request.enable_deep_thinking,
-            selected_graph, 
+            selected_graph,
+            request_id,
         ),
         media_type="text/event-stream",
     )
@@ -283,85 +308,209 @@ async def _astream_workflow_generator(
     report_style: ReportStyle,
     enable_deep_thinking: bool,
     graph_instance= None,
+    request_id: str = None,
 ):
-    # Process initial messages
-    for message in messages:
-        if isinstance(message, dict) and "content" in message:
-            _process_initial_messages(message, thread_id)
+    # 获取日志记录器
+    request_logger = get_request_logger() if request_id else None
+    
+    # 用于收集中间结果和最终结果
+    intermediate_results = []
+    final_result = ""
+    
+    try:
+        # Process initial messages
+        for message in messages:
+            if isinstance(message, dict) and "content" in message:
+                _process_initial_messages(message, thread_id)
 
-    # Prepare workflow input
-    workflow_input = {
-        "messages": messages,
-        "plan_iterations": 0,
-        "final_report": "",
-        "current_plan": None,
-        "observations": [],
-        "auto_accepted_plan": auto_accepted_plan,
-        "enable_background_investigation": enable_background_investigation,
-        "research_topic": messages[-1]["content"] if messages else "",
-    }
+        # Prepare workflow input
+        workflow_input = {
+            "messages": messages,
+            "plan_iterations": 0,
+            "final_report": "",
+            "current_plan": None,
+            "observations": [],
+            "auto_accepted_plan": auto_accepted_plan,
+            "enable_background_investigation": enable_background_investigation,
+            "research_topic": messages[-1]["content"] if messages else "",
+        }
 
-    if not auto_accepted_plan and interrupt_feedback:
-        resume_msg = f"[{interrupt_feedback}]"
-        if messages:
-            resume_msg += f" {messages[-1]['content']}"
-        workflow_input = Command(resume=resume_msg)
+        if not auto_accepted_plan and interrupt_feedback:
+            resume_msg = f"[{interrupt_feedback}]"
+            if messages:
+                resume_msg += f" {messages[-1]['content']}"
+            workflow_input = Command(resume=resume_msg)
 
-    # Prepare workflow config
-    workflow_config = {
-        "thread_id": thread_id,
-        "resources": resources,
-        "max_plan_iterations": max_plan_iterations,
-        "max_step_num": max_step_num,
-        "max_search_results": max_search_results,
-        "mcp_settings": mcp_settings,
-        "report_style": report_style.value,
-        "enable_deep_thinking": enable_deep_thinking,
-        "recursion_limit": get_recursion_limit(),
-    }
-     # 使用传入的graph_instance，如果没有则使用默认graph
-    selected_graph = graph_instance or graph
+        # Prepare workflow config
+        workflow_config = {
+            "thread_id": thread_id,
+            "resources": resources,
+            "max_plan_iterations": max_plan_iterations,
+            "max_step_num": max_step_num,
+            "max_search_results": max_search_results,
+            "mcp_settings": mcp_settings,
+            "report_style": report_style.value,
+            "enable_deep_thinking": enable_deep_thinking,
+            "recursion_limit": get_recursion_limit(),
+        }
+        # 使用传入的graph_instance，如果没有则使用默认graph
+        selected_graph = graph_instance or graph
 
-    checkpoint_saver = get_bool_env("LANGGRAPH_CHECKPOINT_SAVER", False)
-    checkpoint_url = get_str_env("LANGGRAPH_CHECKPOINT_DB_URL", "")
-    # Handle checkpointer if configured
-    connection_kwargs = {
-        "autocommit": True,
-        "row_factory": "dict_row",
-        "prepare_threshold": 0,
-    }
-    if checkpoint_saver and checkpoint_url != "":
-        if checkpoint_url.startswith("postgresql://"):
-            logger.info("start async postgres checkpointer.")
-            async with AsyncConnectionPool(
-                checkpoint_url, kwargs=connection_kwargs
-            ) as conn:
-                checkpointer = AsyncPostgresSaver(conn)
-                await checkpointer.setup()
-                selected_graph.checkpointer = checkpointer
-                selected_graph.store = in_memory_store
-                async for event in _stream_graph_events(
-                    graph, workflow_input, workflow_config, thread_id
-                ):
-                    yield event
+        checkpoint_saver = get_bool_env("LANGGRAPH_CHECKPOINT_SAVER", False)
+        checkpoint_url = get_str_env("LANGGRAPH_CHECKPOINT_DB_URL", "")
+        # Handle checkpointer if configured
+        connection_kwargs = {
+            "autocommit": True,
+            "row_factory": "dict_row",
+            "prepare_threshold": 0,
+        }
+        if checkpoint_saver and checkpoint_url != "":
+            if checkpoint_url.startswith("postgresql://"):
+                logger.info("start async postgres checkpointer.")
+                async with AsyncConnectionPool(
+                    checkpoint_url, kwargs=connection_kwargs
+                ) as conn:
+                    checkpointer = AsyncPostgresSaver(conn)
+                    await checkpointer.setup()
+                    selected_graph.checkpointer = checkpointer
+                    selected_graph.store = in_memory_store
+                    async for event in _stream_graph_events(
+                        graph, workflow_input, workflow_config, thread_id
+                    ):
+                        # 记录prompts和中间结果
+                        if request_logger:
+                            _log_event_data(request_logger, request_id, event, intermediate_results)
+                        yield event
 
-        if checkpoint_url.startswith("mongodb://"):
-            logger.info("start async mongodb checkpointer.")
-            async with AsyncMongoDBSaver.from_conn_string(
-                checkpoint_url
-            ) as checkpointer:
-                selected_graph.checkpointer = checkpointer
-                selected_graph.store = in_memory_store
-                async for event in _stream_graph_events(
-                    graph, workflow_input, workflow_config, thread_id
-                ):
-                    yield event
-    else:
-        # Use graph without MongoDB checkpointer
-        async for event in _stream_graph_events(
-            selected_graph, workflow_input, workflow_config, thread_id
-        ):
-            yield event
+            if checkpoint_url.startswith("mongodb://"):
+                logger.info("start async mongodb checkpointer.")
+                async with AsyncMongoDBSaver.from_conn_string(
+                    checkpoint_url
+                ) as checkpointer:
+                    selected_graph.checkpointer = checkpointer
+                    selected_graph.store = in_memory_store
+                    async for event in _stream_graph_events(
+                        graph, workflow_input, workflow_config, thread_id
+                    ):
+                        # 记录prompts和中间结果
+                        if request_logger:
+                            _log_event_data(request_logger, request_id, event, intermediate_results)
+                        yield event
+        else:
+            # Use graph without MongoDB checkpointer
+            async for event in _stream_graph_events(
+                selected_graph, workflow_input, workflow_config, thread_id
+            ):
+                # 记录prompts和中间结果
+                if request_logger:
+                    _log_event_data(request_logger, request_id, event, intermediate_results)
+                    
+                    # 收集最终结果
+                    if "final_report" in str(event):
+                        try:
+                            event_str = event.split("data: ")[1] if "data: " in event else event
+                            event_data = json.loads(event_str)
+                            if "content" in event_data and event_data.get("finish_reason") == "stop":
+                                final_result = event_data["content"]
+                        except (json.JSONDecodeError, IndexError, AttributeError):
+                            pass
+                
+                yield event
+        
+        # 记录最终响应
+        if request_logger and request_id:
+            # 如果final_result为空，尝试从intermediate_results中提取
+            if not final_result and intermediate_results:
+                for result in reversed(intermediate_results):
+                    if result.get("content") and result.get("finish_reason") == "stop":
+                        final_result = result["content"]
+                        break
+            
+            request_logger.log_response(
+                request_id=request_id,
+                final_result=final_result,
+                intermediate_results=intermediate_results[-20:] if len(intermediate_results) > 20 else intermediate_results,  # 只保存最后20条中间结果
+                response_metadata={
+                    "total_events": len(intermediate_results),
+                }
+            )
+    
+    except Exception as e:
+        # 记录错误
+        if request_logger and request_id:
+            request_logger.log_error(
+                request_id=request_id,
+                error_message=str(e),
+                error_details={
+                    "error_type": type(e).__name__,
+                    "thread_id": thread_id,
+                }
+            )
+        raise
+
+
+def _log_event_data(request_logger, request_id: str, event: str, intermediate_results: list):
+    """
+    记录事件数据到日志
+    """
+    try:
+        # 解析事件
+        if "data: " in event:
+            event_parts = event.split("\n")
+            event_type = ""
+            event_data = None
+            
+            for part in event_parts:
+                if part.startswith("event: "):
+                    event_type = part[7:].strip()
+                elif part.startswith("data: "):
+                    try:
+                        event_data = json.loads(part[6:])
+                    except json.JSONDecodeError:
+                        continue
+            
+            if event_data:
+                # 记录AI消息内容（可能包含prompt）
+                if event_type == "message_chunk" and "content" in event_data:
+                    content = event_data["content"]
+                    agent_name = event_data.get("agent", "unknown")
+                    
+                    # 如果内容很长，可能是prompt或重要输出
+                    if len(content) > 100:
+                        request_logger.log_prompt(
+                            request_id=request_id,
+                            agent_name=agent_name,
+                            prompt=content,
+                            prompt_metadata={
+                                "event_type": event_type,
+                                "langgraph_node": event_data.get("langgraph_node", ""),
+                                "checkpoint_ns": event_data.get("checkpoint_ns", ""),
+                            }
+                        )
+                    
+                    # 收集中间结果
+                    intermediate_results.append({
+                        "agent": agent_name,
+                        "content": content,
+                        "finish_reason": event_data.get("finish_reason", ""),
+                        "timestamp": event_data.get("timestamp", ""),
+                    })
+                
+                # 记录工具调用
+                elif event_type == "tool_calls" and "tool_calls" in event_data:
+                    for tool_call in event_data["tool_calls"]:
+                        request_logger.log_prompt(
+                            request_id=request_id,
+                            agent_name=event_data.get("agent", "unknown"),
+                            prompt=f"Tool Call: {tool_call.get('name', 'unknown')}\nArgs: {json.dumps(tool_call.get('args', {}), ensure_ascii=False)}",
+                            prompt_metadata={
+                                "event_type": "tool_call",
+                                "tool_name": tool_call.get("name", "unknown"),
+                            }
+                        )
+    
+    except Exception as e:
+        logger.debug(f"Failed to log event data: {e}")
 
 
 def _make_event(event_type: str, data: dict[str, any]):

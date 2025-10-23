@@ -4,6 +4,7 @@
 import json
 import logging
 import os
+from datetime import datetime
 from typing import Annotated, Literal
 
 from langchain_core.messages import AIMessage, HumanMessage
@@ -301,6 +302,37 @@ def reporter_node(state: State, config: RunnableConfig):
             )
         )
     logger.debug(f"Current invoke messages: {invoke_messages}")
+    
+    # 记录完整的invoke messages到日志系统
+    try:
+        from src.utils.request_logger import get_request_logger
+        request_logger = get_request_logger()
+        
+        # 获取当前线程ID（从state中获取）
+        thread_id = state.get("configurable", {}).get("thread_id", "unknown")
+        request_id = f"{thread_id}_{datetime.now().isoformat()}"
+        
+        # 构建完整的prompt内容
+        full_prompt = ""
+        for msg in invoke_messages:
+            if hasattr(msg, 'content'):
+                full_prompt += f"{msg.__class__.__name__}: {msg.content}\n\n"
+        
+        # 记录到日志
+        request_logger.log_prompt(
+            request_id=request_id,
+            agent_name="reporter",
+            prompt=full_prompt,
+            prompt_metadata={
+                "node": "reporter_node",
+                "total_messages": len(invoke_messages),
+                "observations_count": len(observations),
+            }
+        )
+        logger.info(f"已记录reporter invoke messages到日志系统，request_id: {request_id}")
+    except Exception as e:
+        logger.warning(f"记录reporter invoke messages失败: {e}")
+    
     llm = get_llm_by_type(AGENT_LLM_MAP["reporter"]) 
     response_content = ""
     try:
@@ -672,7 +704,7 @@ async def simple_researcher_node(state: State, config: RunnableConfig) -> Comman
     try:
         from src.tools.bm25_search import bm25_search_tool
         logger.info("正在执行BM25搜索...")
-        search_results = bm25_search_tool.invoke(query, limit=2, include_snippets=True)
+        search_results = bm25_search_tool.invoke(query, limit=1, include_snippets=True)
         logger.info(f"BM25搜索完成，结果长度: {len(str(search_results))}")
         logger.debug(f"BM25搜索结果: {search_results}")
         
@@ -683,7 +715,7 @@ async def simple_researcher_node(state: State, config: RunnableConfig) -> Comman
         import os
         # 从搜索结果中提取路径并转换为文件名
         path_matches = re.findall(r'\*\*路径\*\*: (.+)', search_results)
-        found_files = [os.path.basename(path) for path in path_matches[:2]]  # 最多显示2个文件
+        found_files = [os.path.basename(path) for path in path_matches[:1]]  # 最多显示2个文件
         
     except Exception as e:
         logger.error(f"BM25搜索失败: {e}", exc_info=True)
@@ -705,37 +737,65 @@ async def simple_researcher_node(state: State, config: RunnableConfig) -> Comman
 
     # 5) 构造提示消息（与原始一致）
 
+#     system_content = f"""你是一个专业的餐饮智能助手，专门为餐饮行业员工和店长提供专业的解答和指导。
+# 回答要求：
+# 1. 内容必须真实、可验证、无事实错误。
+# 2. 语言要尽量简单直接，避免使用复杂句式。
+# 3. 高亮重点答案，帮助用户快速理解核心信息。
+# 4. 如需补充信息，适当扩展但控制篇幅，不要冗长。
+# 5. 结构清晰，有条理，优先满足用户的实际问题需求。"""
+    # system_content = f"""你是一个专业的餐饮智能助手，专门为餐饮行业员工和店长提供专业的解答和指导。
+    #     回答要求：
+    #     1. 内容必须真实、可验证、无事实错误。
+    #     2. 语言要尽量简单直接，避免使用复杂句式。
+    #     3. 高亮重点答案，帮助用户快速理解核心信息。
+    #     4. 如需补充信息，适当扩展但控制篇幅，不要冗长。
+    #     5. 结构清晰，有条理，优先满足用户的实际问题需求。
+    #     """
+    # user_content = f"""
+    #     1. 分析用户问题，明确其核心需求。
+    #     2. 判断内部文档是否与该问题相关：
+    #     - 有关：引用文档内容进行回答，不得修改原有信息（如食材用量、配方等）。
+    #     - 无关：直接基于专业知识作答。
+    #     3. 给出清晰、可执行的解决方案，必要时补充行业标准建议。
+    #     4. 结构清晰，重点突出，语言简洁。
+    #     5. 使用语言：{locale}
 
-    system_content = f"""你是一个专业的餐饮智能助手，专门为餐饮行业员工和店长提供专业的解答和指导。
-        回答要求：
-        1. 内容必须真实、可验证、无事实错误。
-        2. 语言要尽量简单直接，避免使用复杂句式。
-        3. 高亮重点答案，帮助用户快速理解核心信息。
-        4. 如需补充信息，适当扩展但控制篇幅，不要冗长。
-        5. 结构清晰，有条理，优先满足用户的实际问题需求。
-        """
+    #     连锁餐饮常见处理逻辑：
+    #     - 出品偏差：判断偏差程度，小偏差允许标准内调整（如加汤稀释、加热保香），并记录调整原因；严重偏差立即停止出品并上报。
+    #     - 食材异常：不合格拒收或停售，记录批次信息并上报总部。
+    #     - 设备异常：如影响安全或出品质量，立即停售相关品项，联系维修并上报。
+    #     - 顾客客诉：先安抚顾客，现场补救或记录情况，上报总部复盘。
+
+    #     用户问题：{query}
+    #     相关内部文档信息：
+    #     {search_results}
+
+    #     请基于以上信息，提供简明、准确、可落地的餐饮解决方案。
+    #     """
+    # user_content = f"""
+
+    #     用户问题：{query}
+    #     相关内部文档信息：
+    #     {search_results}
+    #     """
+    system_content = f"""
+You are a professional restaurant operations assistant, specialized in providing accurate and practical guidance for restaurant staff and managers.
+
+Answer requirements:
+1. All information must be factual, verifiable, and error-free.
+2. Use clear and simple language, avoiding complex sentences.
+3. Highlight key points to help users quickly grasp the core answer.
+4. If additional information is needed, keep it concise and relevant — avoid unnecessary details.
+5. Keep the structure clear and organized, focusing on solving the user's actual problem.
+"""
+
     user_content = f"""
-        1. 分析用户问题，明确其核心需求。
-        2. 判断内部文档是否与该问题相关：
-        - 有关：引用文档内容进行回答，不得修改原有信息（如食材用量、配方等）。
-        - 无关：直接基于专业知识作答。
-        3. 给出清晰、可执行的解决方案，必要时补充行业标准建议。
-        4. 结构清晰，重点突出，语言简洁。
-        5. 使用语言：{locale}
-
-        连锁餐饮常见处理逻辑：
-        - 出品偏差：判断偏差程度，小偏差允许标准内调整（如加汤稀释、加热保香），并记录调整原因；严重偏差立即停止出品并上报。
-        - 食材异常：不合格拒收或停售，记录批次信息并上报总部。
-        - 设备异常：如影响安全或出品质量，立即停售相关品项，联系维修并上报。
-        - 顾客客诉：先安抚顾客，现场补救或记录情况，上报总部复盘。
-
-        用户问题：{query}
-        相关内部文档信息：
-        {search_results}
-
-        请基于以上信息，提供简明、准确、可落地的餐饮解决方案。
-        """
-
+User Question: {query}
+Relevant Internal Documents:
+{search_results}
+Language: {locale}
+"""
 
     # system_content = f"""你是餐饮行业资深厨师，熟悉各类菜品操作流程、调味比例和烹饪规范。"""
     # user_content = f"""
@@ -744,12 +804,12 @@ async def simple_researcher_node(state: State, config: RunnableConfig) -> Comman
     # 2. 文档相关性判断：文档中是否包含相关信息
     # 3. 专业指导：
     #     - 如果文档提供了解决方案，严格引用文档
-    #     - 如果文档无解，说明“文档未提供方案”，可给出一般性安全建议，但不得改变菜品味道
+    #     - 如果文档无解，说明"文档未提供方案"，可给出一般性安全建议，但不得改变菜品味道
     # 4. 行业专业提示：解释为什么这样处理更安全/规范
     # 5. 使用语言：{locale}
     # 6. 注意：
     # - 不要建议破坏菜品原味的方法（如加水稀释高汤、随意改变调味比例）。
-    # - 如果文档中没有明确解决方案，模型应说明“文档中未提供解决方案”，而不是凭经验或常识随意推测。
+    # - 如果文档中没有明确解决方案，模型应说明"文档中未提供解决方案"，而不是凭经验或常识随意推测。
     # - 提供的操作建议必须遵循餐饮行业标准和食材使用规范。
 
     # 用户问题：{query}
@@ -765,6 +825,37 @@ async def simple_researcher_node(state: State, config: RunnableConfig) -> Comman
     ]
     logger.info(f"提示消息: {user_content}")
     logger.info(f"提示消息就绪，数量: {len(invoke_messages)}")
+    
+    # 记录完整的invoke messages到日志系统
+    try:
+        from src.utils.request_logger import get_request_logger
+        request_logger = get_request_logger()
+        
+        # 获取当前线程ID（从state中获取）
+        thread_id = state.get("configurable", {}).get("thread_id", "unknown")
+        request_id = f"{thread_id}_{datetime.now().isoformat()}"
+        
+        # 构建完整的prompt内容
+        full_prompt = ""
+        for msg in invoke_messages:
+            if hasattr(msg, 'content'):
+                full_prompt += f"{msg.__class__.__name__}: {msg.content}\n\n"
+        
+        # 记录到日志
+        request_logger.log_prompt(
+            request_id=request_id,
+            agent_name="simple_researcher",
+            prompt=full_prompt,
+            prompt_metadata={
+                "node": "simple_researcher_node",
+                "system_content_length": len(system_content),
+                "user_content_length": len(user_content),
+                "total_messages": len(invoke_messages),
+            }
+        )
+        logger.info(f"已记录invoke messages到日志系统，request_id: {request_id}")
+    except Exception as e:
+        logger.warning(f"记录invoke messages失败: {e}")
 
     # 6) 选择模型（与 reporter/planner 风格一致）
     llm = get_llm_by_type(AGENT_LLM_MAP["reporter"])

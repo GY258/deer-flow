@@ -27,3 +27,6 @@ conf.yaml
 # coverage report
 coverage.xml
 coverage/
+
+# Request logs (keep directory, ignore log files)
+logs/requests/*.jsonl
