@@ -172,7 +172,7 @@ function MessageListItem({
         content = message.content ? (
           <div className={cn("flex w-full px-4", className)}>
             <MessageBubble message={message}>
-              <div className="flex w-full flex-col break-words">
+              <div className="flex w-full flex-col">
                 <Markdown
                   className={cn(
                     message.role === "user" &&
@@ -259,7 +259,7 @@ function MessageBubble({
         message.role === "assistant" && "bg-card rounded-es-none",
         className,
       )}
-      style={{ wordBreak: "break-all" }}
+      style={{ wordBreak: "break-word" }}
     >
       {children}
     </div>
@@ -514,14 +514,14 @@ function PlanCard({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div style={{ wordBreak: 'break-all', whiteSpace: 'normal' }}>
+              <div style={{ wordBreak: 'break-word', whiteSpace: 'normal' }}>
                 <Markdown className="opacity-80" animated={message.isStreaming}>
                   {plan.thought}
                 </Markdown>
                 {plan.steps && (
                   <ul className="my-2 flex list-decimal flex-col gap-4 border-l-[2px] pl-8">
                     {plan.steps.map((step, i) => (
-                      <li key={`step-${i}`} style={{ wordBreak: 'break-all', whiteSpace: 'normal' }}>
+                      <li key={`step-${i}`} style={{ wordBreak: 'break-word', whiteSpace: 'normal' }}>
                         <div className="flex items-start gap-2">
                           <div className="flex-1">
                             <h3 className="mb flex items-center gap-2 text-lg font-medium">
@@ -539,7 +539,7 @@ function PlanCard({
                                 </Tooltip>
                               )}
                             </h3>
-                            <div className="text-muted-foreground text-sm" style={{ wordBreak: 'break-all', whiteSpace: 'normal' }}>
+                            <div className="text-muted-foreground text-sm" style={{ wordBreak: 'break-word', whiteSpace: 'normal' }}>
                               <Markdown animated={message.isStreaming}>
                                 {step.description}
                               </Markdown>

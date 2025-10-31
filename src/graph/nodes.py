@@ -788,6 +788,13 @@ Answer requirements:
 3. Highlight key points to help users quickly grasp the core answer.
 4. If additional information is needed, keep it concise and relevant — avoid unnecessary details.
 5. Keep the structure clear and organized, focusing on solving the user's actual problem.
+
+Formatting rules:
+- Use Markdown formatting for all responses
+- Use **bold** for key points
+- Use bullet lists and numbered steps for procedures
+- Use code blocks ``` ``` for commands, formulas, or templates
+- Keep paragraphs short for readability
 """
 
     user_content = f"""
@@ -795,6 +802,9 @@ User Question: {query}
 Relevant Internal Documents:
 {search_results}
 Language: {locale}
+
+
+When using internal documents, quote related lines or sections clearly.
 """
 
     # system_content = f"""你是餐饮行业资深厨师，熟悉各类菜品操作流程、调味比例和烹饪规范。"""
