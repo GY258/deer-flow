@@ -10,6 +10,8 @@ import {
   ChevronRight,
   Lightbulb,
   Wrench,
+  ThumbsUp,
+  ThumbsDown,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useCallback, useMemo, useRef, useState } from "react";
@@ -36,6 +38,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "~/components/ui/collapsible";
+import { submitFeedback } from "~/core/api";
 import type { Message, Option } from "~/core/messages";
 import {
   closeResearch,
@@ -183,6 +186,7 @@ function MessageListItem({
                 >
                   {message.content}
                 </Markdown>
+                <FeedbackButtons message={message} />
               </div>
             </MessageBubble>
           </div>
@@ -681,6 +685,91 @@ function ToolsDisplay({ tools }: { tools: string[] }) {
           {tool}
         </span>
       ))}
+    </div>
+  );
+}
+
+function FeedbackButtons({ message }: { message: Message }) {
+  const [feedback, setFeedback] = React.useState<"like" | "dislike" | null>(null);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const threadId = useStore((state) => state.threadId);
+  const messages = useStore((state) => state.messages);
+  
+  // 查找该线程的第一条用户消息作为原始问题
+  const userQuery = React.useMemo(() => {
+    const messageList = Array.from(messages.values());
+    const firstUserMessage = messageList.find(m => m.role === "user");
+    return firstUserMessage?.content ?? "";
+  }, [messages]);
+
+  const handleFeedback = async (feedbackType: "like" | "dislike") => {
+    if (isSubmitting || feedback) return;
+
+    setIsSubmitting(true);
+    try {
+      await submitFeedback({
+        message_id: message.id,
+        thread_id: threadId ?? "unknown",
+        feedback_type: feedbackType,
+        agent_name: message.agent,
+        user_query: userQuery,
+        additional_info: {
+          content_length: message.content?.length ?? 0,
+          timestamp: new Date().toISOString(),
+        },
+      });
+      setFeedback(feedbackType);
+    } catch (error) {
+      console.error("Failed to submit feedback:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="mt-3 flex items-center gap-2 border-t pt-2">
+      <span className="text-muted-foreground text-sm">这个回答对你有帮助吗？</span>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => handleFeedback("like")}
+        disabled={isSubmitting || !!feedback}
+        className={cn(
+          "h-8 px-2",
+          feedback === "like" && "text-green-600 bg-green-50 hover:bg-green-100"
+        )}
+      >
+        <ThumbsUp 
+          size={16} 
+          className={cn(
+            feedback === "like" ? "fill-current" : ""
+          )}
+        />
+        <span className="ml-1">有帮助</span>
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => handleFeedback("dislike")}
+        disabled={isSubmitting || !!feedback}
+        className={cn(
+          "h-8 px-2",
+          feedback === "dislike" && "text-red-600 bg-red-50 hover:bg-red-100"
+        )}
+      >
+        <ThumbsDown 
+          size={16} 
+          className={cn(
+            feedback === "dislike" ? "fill-current" : ""
+          )}
+        />
+        <span className="ml-1">没帮助</span>
+      </Button>
+      {feedback && (
+        <span className="text-muted-foreground text-xs ml-2">
+          谢谢你的反馈！
+        </span>
+      )}
     </div>
   );
 }

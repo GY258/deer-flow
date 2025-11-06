@@ -182,6 +182,42 @@ class RequestLogger:
         self._write_log_entry(log_entry)
         logger.error(f"Logged error for request: {request_id}: {error_message}")
     
+    def log_feedback(
+        self,
+        request_id: str,
+        user_feedback: str,
+        feedback_type: str,
+        message_id: Optional[str] = None,
+        agent_name: Optional[str] = None,
+        feedback_metadata: Optional[Dict[str, Any]] = None,
+    ):
+        """
+        记录用户反馈
+        
+        Args:
+            request_id: 请求ID
+            user_feedback: 用户反馈内容 (like/dislike)
+            feedback_type: 反馈类型 (rating, comment等)
+            message_id: 消息ID
+            agent_name: Agent名称
+            feedback_metadata: 反馈元数据
+        """
+        timestamp = datetime.now().isoformat()
+        
+        log_entry = {
+            "request_id": request_id,
+            "timestamp": timestamp,
+            "type": "user_feedback",
+            "user_feedback": user_feedback,
+            "feedback_type": feedback_type,
+            "message_id": message_id,
+            "agent_name": agent_name,
+            "metadata": feedback_metadata or {},
+        }
+        
+        self._write_log_entry(log_entry)
+        logger.info(f"Logged user feedback for request: {request_id}, feedback: {user_feedback}, type: {feedback_type}")
+    
     def _write_log_entry(self, entry: Dict[str, Any]):
         """
         写入日志条目到文件（JSONL格式）

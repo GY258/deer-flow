@@ -110,3 +110,17 @@ class EnhancePromptRequest(BaseModel):
     report_style: Optional[str] = Field(
         "academic", description="The style of the report"
     )
+
+
+class FeedbackRequest(BaseModel):
+    message_id: str = Field(..., description="The ID of the message being rated")
+    thread_id: str = Field(..., description="The conversation thread ID")
+    feedback_type: str = Field(..., description="The type of feedback (like/dislike)")
+    agent_name: Optional[str] = Field(None, description="The agent that generated the message")
+    user_query: Optional[str] = Field(None, description="The original user query")
+    additional_info: Optional[dict] = Field(None, description="Additional feedback information")
+
+
+class FeedbackResponse(BaseModel):
+    success: bool = Field(..., description="Whether the feedback was successfully recorded")
+    message: str = Field(..., description="Response message")

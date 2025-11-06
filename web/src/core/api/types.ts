@@ -27,7 +27,7 @@ interface GenericEvent<T extends string, D extends object> {
   data: {
     id: string;
     thread_id: string;
-    agent: "coordinator" | "planner" | "researcher" | "coder" | "reporter";
+    agent: "coordinator" | "planner" | "researcher" | "coder" | "reporter" | "simple_researcher";
     role: "user" | "assistant" | "tool";
     finish_reason?: "stop" | "tool_calls" | "interrupt";
   } & D;
@@ -82,3 +82,28 @@ export type ChatEvent =
   | ToolCallChunksEvent
   | ToolCallResultEvent
   | InterruptEvent;
+
+export interface TTSRequest {
+  text: string;
+  encoding?: string;
+  speed_ratio?: number;
+  volume_ratio?: number;
+  pitch_ratio?: number;
+  text_type?: string;
+  with_frontend?: number;
+  frontend_type?: string;
+}
+
+export interface FeedbackRequest {
+  message_id: string;
+  thread_id: string;
+  feedback_type: "like" | "dislike";
+  agent_name?: string;
+  user_query?: string;
+  additional_info?: Record<string, any>;
+}
+
+export interface FeedbackResponse {
+  success: boolean;
+  message: string;
+}

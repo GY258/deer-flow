@@ -31,6 +31,8 @@ from src.rag.retriever import Resource
 from src.server.chat_request import (
     ChatRequest,
     EnhancePromptRequest,
+    FeedbackRequest,
+    FeedbackResponse,
     GeneratePodcastRequest,
     GeneratePPTRequest,
     GenerateProseRequest,
@@ -777,4 +779,44 @@ async def config():
         rag=RAGConfigResponse(provider=SELECTED_RAG_PROVIDER),
         models=get_configured_llm_models(),
     )
+
+
+@app.post("/api/feedback", response_model=FeedbackResponse)
+async def submit_feedback(request: FeedbackRequest):
+    """Submit user feedback for a message."""
+    try:
+        request_logger = get_request_logger()
+        
+        # 构建请求ID - 使用thread_id和当前时间戳
+        from datetime import datetime
+        request_id = f"{request.thread_id}_{datetime.now().isoformat()}"
+        
+        # 记录用户反馈到日志系统
+        request_logger.log_feedback(
+            request_id=request_id,
+            user_feedback=request.feedback_type,
+            feedback_type="rating",
+            message_id=request.message_id,
+            agent_name=request.agent_name or "unknown",
+            feedback_metadata={
+                "thread_id": request.thread_id,
+                "user_query": request.user_query,
+                "additional_info": request.additional_info or {},
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+        
+        logger.info(f"User feedback received: {request.feedback_type} for message: {request.message_id}")
+        
+        return FeedbackResponse(
+            success=True,
+            message="Feedback recorded successfully"
+        )
+        
+    except Exception as e:
+        logger.error(f"Error recording feedback: {e}")
+        return FeedbackResponse(
+            success=False,
+            message=f"Error recording feedback: {str(e)}"
+        )
 
