@@ -14,7 +14,7 @@ import {
   ThumbsDown,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { LoadingAnimation } from "~/components/deer-flow/loading-animation";
 import { Markdown } from "~/components/deer-flow/markdown";
@@ -690,12 +690,20 @@ function ToolsDisplay({ tools }: { tools: string[] }) {
 }
 
 function FeedbackButtons({ message }: { message: Message }) {
-  const [feedback, setFeedback] = React.useState<"like" | "dislike" | null>(null);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [showTextInput, setShowTextInput] = React.useState(false);
-  const [feedbackText, setFeedbackText] = React.useState("");
+  const [feedbackState, setFeedbackState] = React.useState<{
+    submitted: "like" | "dislike" | null;
+    isSubmitting: boolean;
+    showTextInput: boolean;
+    text: string;
+  }>({
+    submitted: null,
+    isSubmitting: false,
+    showTextInput: false,
+    text: "",
+  });
   const threadId = useStore((state) => state.threadId);
   const messages = useStore((state) => state.messages);
+  const feedbackInputRef = React.useRef<HTMLInputElement | null>(null);
   
   // 查找该线程的第一条用户消息作为原始问题
   const userQuery = React.useMemo(() => {
@@ -704,36 +712,81 @@ function FeedbackButtons({ message }: { message: Message }) {
     return firstUserMessage?.content ?? "";
   }, [messages]);
 
-  const handleFeedback = async (feedbackType: "like" | "dislike") => {
-    if (isSubmitting || feedback) return;
-
-    // 如果是不喜欢，先显示文本输入框
-    if (feedbackType === "dislike" && !showTextInput) {
-      setShowTextInput(true);
-      return;
+  useEffect(() => {
+    if (feedbackState.showTextInput) {
+      feedbackInputRef.current?.focus();
     }
+  }, [feedbackState.showTextInput]);
 
-    setIsSubmitting(true);
-    try {
-      await submitFeedback({
-        message_id: message.id,
-        thread_id: threadId ?? "unknown",
-        feedback_type: feedbackType,
-        agent_name: message.agent,
-        user_query: userQuery,
-        feedback_text: feedbackText || undefined,
-        additional_info: {
-          content_length: message.content?.length ?? 0,
-          timestamp: new Date().toISOString(),
-        },
-      });
-      setFeedback(feedbackType);
-      setShowTextInput(false);
-    } catch (error) {
-      console.error("Failed to submit feedback:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+
+  const submitFeedbackWithType = useCallback(
+    async (feedbackType: "like" | "dislike") => {
+      if (feedbackState.isSubmitting || feedbackState.submitted) return;
+
+      setFeedbackState(prev => ({ ...prev, isSubmitting: true }));
+      try {
+        await submitFeedback({
+          message_id: message.id,
+          thread_id: threadId ?? "unknown",
+          feedback_type: feedbackType,
+          agent_name: message.agent,
+          user_query: userQuery,
+          feedback_text:
+            feedbackType === "dislike"
+              ? feedbackState.text.trim() || undefined
+              : undefined,
+          additional_info: {
+            content_length: message.content?.length ?? 0,
+            timestamp: new Date().toISOString(),
+          },
+        });
+        setFeedbackState({
+          submitted: feedbackType,
+          isSubmitting: false,
+          showTextInput: false,
+          text: "",
+        });
+      } catch (error) {
+        console.error("Failed to submit feedback:", error);
+        setFeedbackState(prev => ({ ...prev, isSubmitting: false }));
+      }
+    },
+    [
+      feedbackState.isSubmitting,
+      feedbackState.submitted,
+      feedbackState.text,
+      message.agent,
+      message.content,
+      message.id,
+      threadId,
+      userQuery,
+    ],
+  );
+
+  const handleLike = () => {
+    void submitFeedbackWithType("like");
+  };
+
+  const handleOpenDislikeInput = () => {
+    if (feedbackState.isSubmitting || feedbackState.submitted) return;
+    setFeedbackState(prev => ({
+      ...prev,
+      showTextInput: true,
+      text: "",
+    }));
+  };
+
+  const handleSubmitDislike = () => {
+    void submitFeedbackWithType("dislike");
+  };
+
+  const handleCancelDislike = () => {
+    if (feedbackState.isSubmitting) return;
+    setFeedbackState(prev => ({
+      ...prev,
+      showTextInput: false,
+      text: "",
+    }));
   };
 
   return (
@@ -743,17 +796,18 @@ function FeedbackButtons({ message }: { message: Message }) {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => handleFeedback("like")}
-          disabled={isSubmitting || !!feedback}
+          onClick={handleLike}
+          disabled={feedbackState.isSubmitting || !!feedbackState.submitted}
           className={cn(
             "h-8 px-2",
-            feedback === "like" && "text-green-600 bg-green-50 hover:bg-green-100"
+            feedbackState.submitted === "like" &&
+              "text-green-600 bg-green-50 hover:bg-green-100"
           )}
         >
-          <ThumbsUp 
-            size={16} 
+          <ThumbsUp
+            size={16}
             className={cn(
-              feedback === "like" ? "fill-current" : ""
+              feedbackState.submitted === "like" ? "fill-current" : ""
             )}
           />
           <span className="ml-1">有帮助</span>
@@ -761,54 +815,52 @@ function FeedbackButtons({ message }: { message: Message }) {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => handleFeedback("dislike")}
-          disabled={isSubmitting || !!feedback}
+          onClick={handleOpenDislikeInput}
+          disabled={feedbackState.isSubmitting || !!feedbackState.submitted}
           className={cn(
             "h-8 px-2",
-            feedback === "dislike" && "text-red-600 bg-red-50 hover:bg-red-100"
+            feedbackState.submitted === "dislike" &&
+              "text-red-600 bg-red-50 hover:bg-red-100"
           )}
         >
-          <ThumbsDown 
-            size={16} 
+          <ThumbsDown
+            size={16}
             className={cn(
-              feedback === "dislike" ? "fill-current" : ""
+              feedbackState.submitted === "dislike" ? "fill-current" : ""
             )}
           />
           <span className="ml-1">没帮助</span>
         </Button>
-        {feedback && (
+        {feedbackState.submitted && (
           <span className="text-muted-foreground text-xs ml-2">
             谢谢你的反馈！
           </span>
         )}
       </div>
       
-      {showTextInput && !feedback && (
+      {feedbackState.showTextInput && !feedbackState.submitted && (
         <div className="mt-2 flex gap-2">
           <input
             type="text"
             placeholder="请告诉我们原因（可选）..."
-            value={feedbackText}
-            onChange={(e) => setFeedbackText(e.target.value)}
+            value={feedbackState.text}
+            onChange={(e) => setFeedbackState(prev => ({ ...prev, text: e.target.value }))}
             className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            disabled={isSubmitting}
-            autoFocus
+            disabled={feedbackState.isSubmitting}
+            ref={feedbackInputRef}
           />
           <Button
             size="sm"
-            onClick={() => handleFeedback("dislike")}
-            disabled={isSubmitting}
+            onClick={handleSubmitDislike}
+            disabled={feedbackState.isSubmitting}
           >
             提交
           </Button>
           <Button
             size="sm"
             variant="outline"
-            onClick={() => {
-              setShowTextInput(false);
-              setFeedbackText("");
-            }}
-            disabled={isSubmitting}
+            onClick={handleCancelDislike}
+            disabled={feedbackState.isSubmitting}
           >
             取消
           </Button>
