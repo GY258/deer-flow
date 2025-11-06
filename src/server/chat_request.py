@@ -118,6 +118,7 @@ class FeedbackRequest(BaseModel):
     feedback_type: str = Field(..., description="The type of feedback (like/dislike)")
     agent_name: Optional[str] = Field(None, description="The agent that generated the message")
     user_query: Optional[str] = Field(None, description="The original user query")
+    feedback_text: Optional[str] = Field(None, description="User's text feedback/comment")
     additional_info: Optional[dict] = Field(None, description="Additional feedback information")
 
 

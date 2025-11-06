@@ -100,6 +100,7 @@ export interface FeedbackRequest {
   feedback_type: "like" | "dislike";
   agent_name?: string;
   user_query?: string;
+  feedback_text?: string;
   additional_info?: Record<string, any>;
 }
 

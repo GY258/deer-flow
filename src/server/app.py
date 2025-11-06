@@ -801,6 +801,7 @@ async def submit_feedback(request: FeedbackRequest):
             feedback_metadata={
                 "thread_id": request.thread_id,
                 "user_query": request.user_query,
+                "feedback_text": request.feedback_text,
                 "additional_info": request.additional_info or {},
                 "timestamp": datetime.now().isoformat(),
             }

@@ -692,6 +692,8 @@ function ToolsDisplay({ tools }: { tools: string[] }) {
 function FeedbackButtons({ message }: { message: Message }) {
   const [feedback, setFeedback] = React.useState<"like" | "dislike" | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [showTextInput, setShowTextInput] = React.useState(false);
+  const [feedbackText, setFeedbackText] = React.useState("");
   const threadId = useStore((state) => state.threadId);
   const messages = useStore((state) => state.messages);
   
@@ -705,6 +707,12 @@ function FeedbackButtons({ message }: { message: Message }) {
   const handleFeedback = async (feedbackType: "like" | "dislike") => {
     if (isSubmitting || feedback) return;
 
+    // 如果是不喜欢，先显示文本输入框
+    if (feedbackType === "dislike" && !showTextInput) {
+      setShowTextInput(true);
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       await submitFeedback({
@@ -713,12 +721,14 @@ function FeedbackButtons({ message }: { message: Message }) {
         feedback_type: feedbackType,
         agent_name: message.agent,
         user_query: userQuery,
+        feedback_text: feedbackText || undefined,
         additional_info: {
           content_length: message.content?.length ?? 0,
           timestamp: new Date().toISOString(),
         },
       });
       setFeedback(feedbackType);
+      setShowTextInput(false);
     } catch (error) {
       console.error("Failed to submit feedback:", error);
     } finally {
@@ -727,48 +737,82 @@ function FeedbackButtons({ message }: { message: Message }) {
   };
 
   return (
-    <div className="mt-3 flex items-center gap-2 border-t pt-2">
-      <span className="text-muted-foreground text-sm">这个回答对你有帮助吗？</span>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => handleFeedback("like")}
-        disabled={isSubmitting || !!feedback}
-        className={cn(
-          "h-8 px-2",
-          feedback === "like" && "text-green-600 bg-green-50 hover:bg-green-100"
-        )}
-      >
-        <ThumbsUp 
-          size={16} 
+    <div className="mt-3 border-t pt-2">
+      <div className="flex items-center gap-2">
+        <span className="text-muted-foreground text-sm">这个回答对你有帮助吗？</span>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => handleFeedback("like")}
+          disabled={isSubmitting || !!feedback}
           className={cn(
-            feedback === "like" ? "fill-current" : ""
+            "h-8 px-2",
+            feedback === "like" && "text-green-600 bg-green-50 hover:bg-green-100"
           )}
-        />
-        <span className="ml-1">有帮助</span>
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => handleFeedback("dislike")}
-        disabled={isSubmitting || !!feedback}
-        className={cn(
-          "h-8 px-2",
-          feedback === "dislike" && "text-red-600 bg-red-50 hover:bg-red-100"
-        )}
-      >
-        <ThumbsDown 
-          size={16} 
+        >
+          <ThumbsUp 
+            size={16} 
+            className={cn(
+              feedback === "like" ? "fill-current" : ""
+            )}
+          />
+          <span className="ml-1">有帮助</span>
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => handleFeedback("dislike")}
+          disabled={isSubmitting || !!feedback}
           className={cn(
-            feedback === "dislike" ? "fill-current" : ""
+            "h-8 px-2",
+            feedback === "dislike" && "text-red-600 bg-red-50 hover:bg-red-100"
           )}
-        />
-        <span className="ml-1">没帮助</span>
-      </Button>
-      {feedback && (
-        <span className="text-muted-foreground text-xs ml-2">
-          谢谢你的反馈！
-        </span>
+        >
+          <ThumbsDown 
+            size={16} 
+            className={cn(
+              feedback === "dislike" ? "fill-current" : ""
+            )}
+          />
+          <span className="ml-1">没帮助</span>
+        </Button>
+        {feedback && (
+          <span className="text-muted-foreground text-xs ml-2">
+            谢谢你的反馈！
+          </span>
+        )}
+      </div>
+      
+      {showTextInput && !feedback && (
+        <div className="mt-2 flex gap-2">
+          <input
+            type="text"
+            placeholder="请告诉我们原因（可选）..."
+            value={feedbackText}
+            onChange={(e) => setFeedbackText(e.target.value)}
+            className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            disabled={isSubmitting}
+            autoFocus
+          />
+          <Button
+            size="sm"
+            onClick={() => handleFeedback("dislike")}
+            disabled={isSubmitting}
+          >
+            提交
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => {
+              setShowTextInput(false);
+              setFeedbackText("");
+            }}
+            disabled={isSubmitting}
+          >
+            取消
+          </Button>
+        </div>
       )}
     </div>
   );
