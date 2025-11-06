@@ -98,7 +98,7 @@ def _create_llm_use_conf(llm_type: LLMType, conf: Dict[str, Any]) -> BaseChatMod
         merged_conf["api_base"] = merged_conf.pop("base_url", None)
         return ChatDeepSeek(**merged_conf)
     else:
-        return ChatOpenAI(**merged_conf)
+        return ChatOpenAI(**merged_conf, streaming=True)
 
 
 def get_llm_by_type(llm_type: LLMType) -> BaseChatModel:

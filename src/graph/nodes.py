@@ -867,25 +867,19 @@ When using internal documents, quote related lines or sections clearly.
     except Exception as e:
         logger.warning(f"记录invoke messages失败: {e}")
 
-    # 6) 选择模型（与 reporter/planner 风格一致）
+    # 6) 选择模型
     llm = get_llm_by_type(AGENT_LLM_MAP["reporter"])
-    logger.info(f"开始流式生成专业解答，LLM: {AGENT_LLM_MAP['reporter']}")
+    logger.info(f"开始生成专业解答，LLM: {AGENT_LLM_MAP['reporter']}")
 
-    # 7) 内部流式 -> 聚合 -> 一次性写回（与 planner_node 行为对齐）
+    # 7) ✅ 修复流式输出：改用 invoke，让 LangGraph 捕获流式输出
     response_content = ""
     try:
-        # 注：如果你前端订阅了 LLM 的 token 事件，这里会实时吐；仅订阅 values 则最后一次性更新
-        for chunk in llm.stream(invoke_messages):
-            if getattr(chunk, "content", None):
-                response_content += chunk.content
+        response = llm.invoke(invoke_messages)
+        response_content = response.content if hasattr(response, 'content') else str(response)
 
         if not response_content:
-            logger.warning("流式内容为空，回退到 invoke()")
-            resp = llm.invoke(invoke_messages)
-            response_content = getattr(resp, "content", "") or ""
-            if not response_content and getattr(resp, "tool_calls", None):
-                logger.warning(f"模型返回 tool_calls 无纯文本: {resp.tool_calls}")
-                response_content = "抱歉，本次回答为空（模型尝试了工具调用输出）。"
+            logger.warning("内容为空")
+            response_content = "抱歉，本次回答为空。"
 
     except Exception as e:
         logger.error(f"LLM 调用异常: {e}", exc_info=True)
@@ -893,19 +887,11 @@ When using internal documents, quote related lines or sections clearly.
 
     logger.info(f"simple_researcher 响应长度: {len(response_content)}")
 
-    # 8) 一次性写回消息 & 状态（和 planner_node 一致的返回风格）
-    # return Command(
-    #     update={
-    #         "messages": [
-    #             AIMessage(content=response_content, name="coordinator")  # 最终回答
-    #         ],
-    #     }
-    # )
     return Command(
-    update={
-        "final_report": response_content,  # 需要保存就放这里；或干脆不保存
-    }
-)
+        update={
+            "final_report": response_content,
+        }
+    )
 
 
 async def coder_node(
